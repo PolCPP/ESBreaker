@@ -9,10 +9,6 @@ namespace ESBreakerCLI
 {
 	public class DatabaseFiler
 	{
-		// Note: We can't take the "DIRECTORYS" or "MASK" static vars from Contents.Base.Database because 
-		// it fails since it tries to run native android code via Android.Datapath
-		// So if it changes we'll need to update things manually.
-
 		string dbDir = Path.Combine(System.IO.Path.GetDirectoryName(
 										Assembly.GetEntryAssembly().Location), "databases");
 		string saveDir = Path.Combine(System.IO.Path.GetDirectoryName(
@@ -26,8 +22,11 @@ namespace ESBreakerCLI
 														"t2I4C2vaaNAX5mq6ztKThAuSgejBWr8C"
 		};
 
+		// Note: We can't take "MASK_KEY" static vars from Contents.Base.Database because 
+		// it fails since it tries to run native android code via Android.Datapath
+		// Right now we initialize it on LoadMask taking the one from Savedata.Filer which
+		// happens to be the same. This may change on the future
 		byte[] mask;
-
 		string workFile;
 		string saveFile;
 
