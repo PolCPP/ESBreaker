@@ -19,8 +19,6 @@ namespace ESBreakerCLI
 			d.InitFromFile();
 			d.Parse();
 			d.SaveToFile();
-			Console.WriteLine("All done press any key to close");
-			Console.ReadKey();
 		}
 	}
 }
