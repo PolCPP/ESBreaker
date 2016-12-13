@@ -1,0 +1,3 @@
+/lib/*.dll
+/Databases
+.DS_Store

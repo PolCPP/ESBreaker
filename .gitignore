@@ -275,4 +275,4 @@ __pycache__/
 # tools/
 
 # External libs that shouldn't be included
-**/lib/*.dll
+/nuget.exe
