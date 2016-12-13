@@ -32,21 +32,21 @@ namespace ESBreakerCLI
 						JsonObject item = new JsonObject();
 						item["eventNo"] = param.EventNo;
 						item["jp_name"] = param.Name;
-						item["en_name"] = "";
+						item["tr_name"] = "";
 						item["jp_text"] = param.Text;
-						item["en_text"] = "";
+						item["tr_text"] = "";
 						item["fileID"] = information.FileID;
 						if (savedItem != default(JsonObject))
 						{
-							if (savedItem["en_name"] != "")
+							if (savedItem["tr_name"] != "")
 							{
-								param.Name = savedItem["en_name"];
-								item["en_name"] = savedItem["en_name"];
+								param.Name = savedItem["tr_name"];
+								item["tr_name"] = savedItem["tr_name"];
 							}
-							if (savedItem["en_text"] != "")
+							if (savedItem["tr_text"] != "")
 							{
-								param.Text = savedItem["en_text"];
-								item["en_text"] = savedItem["en_text"];
+								param.Text = savedItem["tr_text"];
+								item["tr_text"] = savedItem["tr_text"];
 							}
 						}
 						i++;
@@ -89,13 +89,13 @@ namespace ESBreakerCLI
 						JsonObject item = new JsonObject();
 						item["title_id"] = information.TitleID;
 						item["jp_title"] = param;
-						item["en_title"] = "";
+						item["tr_title"] = "";
 						if (savedItem != default(JsonObject))
 						{
-							if (savedItem["en_title"] != "")
+							if (savedItem["tr_title"] != "")
 							{
-								information.TitleList[idx] = savedItem["en_title"];
-								item["en_title"] = savedItem["en_title"];
+								information.TitleList[idx] = savedItem["tr_title"];
+								item["tr_title"] = savedItem["tr_title"];
 							}
 						}
 						i++;

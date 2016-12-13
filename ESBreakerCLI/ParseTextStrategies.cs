@@ -36,13 +36,13 @@ namespace ESBreakerCLI
 
 				item["assign"] = currentAssign;
 				item["jp_text"] = information.Text;
-				item["en_text"] = "";
+				item["tr_text"] = "";
 				if (savedItem != default(JsonObject))
 				{
-					if (savedItem["en_text"] != "")
+					if (savedItem["tr_text"] != "")
 					{
-						information.Text = savedItem["en_text"];
-						item["en_text"] = savedItem["en_text"];
+						information.Text = savedItem["tr_text"];
+						item["tr_text"] = savedItem["tr_text"];
 					}
 				}
 				if (saveJson)
@@ -77,20 +77,20 @@ namespace ESBreakerCLI
 
 				item["chip"] = chipId;
 				item["jp_CV"] = information.CV;
-				item["en_CV"] = "";
+				item["tr_CV"] = "";
 				item["jp_name"] = information.Name;
-				item["en_name"] = "";
+				item["tr_name"] = "";
 				if (savedItem != default(JsonObject))
 				{
-					if (savedItem["en_name"] != "")
+					if (savedItem["tr_name"] != "")
 					{
-						information.Name = savedItem["en_name"];
-						item["en_name"] = savedItem["en_name"];
+						information.Name = savedItem["tr_name"];
+						item["tr_name"] = savedItem["tr_name"];
 					}
-					if (savedItem["en_CV"] != "")
+					if (savedItem["tr_CV"] != "")
 					{
-						information.CV = savedItem["en_CV"];
-						item["en_CV"] = savedItem["en_CV"];
+						information.CV = savedItem["tr_CV"];
+						item["tr_CV"] = savedItem["tr_CV"];
 					}
 				}
 				if (saveJson)
@@ -133,20 +133,20 @@ namespace ESBreakerCLI
 
 				item["assign"] = currentAssign;
 				item["jp_explainShort"] = information.ExplainShort;
-				item["en_explainShort"] = "";
+				item["tr_explainShort"] = "";
 				item["jp_explainLong"] = information.ExplainLong;
-				item["en_explainLong"] = "";
+				item["tr_explainLong"] = "";
 				if (savedItem != default(JsonObject))
 				{
-					if (savedItem["en_explainShort"] != "")
+					if (savedItem["tr_explainShort"] != "")
 					{
-						information.ExplainLong = savedItem["en_explainShort"];
-						item["en_explainShort"] = savedItem["en_explainShort"];
+						information.ExplainLong = savedItem["tr_explainShort"];
+						item["tr_explainShort"] = savedItem["tr_explainShort"];
 					}
-					if (savedItem["en_explainLong"] != "")
+					if (savedItem["tr_explainLong"] != "")
 					{
-						information.ExplainLong = savedItem["en_explainLong"];
-						item["en_explainLong"] = savedItem["en_explainLong"];
+						information.ExplainLong = savedItem["tr_explainLong"];
+						item["tr_explainLong"] = savedItem["tr_explainLong"];
 					}
 				}
 				if (saveJson)
@@ -211,13 +211,13 @@ namespace ESBreakerCLI
 						}
 						item["assign"] = currentAssign;
 						item["jp_text"] = innerInformation.Name;
-						item["en_text"] = "";
+						item["tr_text"] = "";
 						if (savedItem != default(JsonObject))
 						{
-							if (savedItem["en_text"] != "")
+							if (savedItem["tr_text"] != "")
 							{
-								innerInformation.Name = savedItem["en_text"];
-								item["en_text"] = savedItem["en_text"];
+								innerInformation.Name = savedItem["tr_text"];
+								item["tr_text"] = savedItem["tr_text"];
 							}
 						}
 						if (saveJson)
@@ -284,13 +284,13 @@ namespace ESBreakerCLI
 						}
 						item["assign"] = currentAssign;
 						item["jp_text"] = innerInformation.Name;
-						item["en_text"] = "";
+						item["tr_text"] = "";
 						if (savedItem != default(JsonObject))
 						{
-							if (savedItem["en_text"] != "")
+							if (savedItem["tr_text"] != "")
 							{
-								innerInformation.Name = savedItem["en_text"];
-								item["en_text"] = savedItem["en_text"];
+								innerInformation.Name = savedItem["tr_text"];
+								item["tr_text"] = savedItem["tr_text"];
 							}
 						}
 						if (saveJson)
@@ -392,13 +392,13 @@ namespace ESBreakerCLI
 						JsonObject item = new JsonObject();
 						item["text_id"] = innerInformation.TextId;
 						item["jp_text"] = innerInformation.Text;
-						item["en_text"] = "";
+						item["tr_text"] = "";
 						if (savedItem != default(JsonObject))
 						{
-							if (savedItem["en_text"] != "")
+							if (savedItem["tr_text"] != "")
 							{
-								innerInformation.Text = savedItem["en_text"];
-								item["en_text"] = savedItem["en_text"];
+								innerInformation.Text = savedItem["tr_text"];
+								item["tr_text"] = savedItem["tr_text"];
 							}
 						}
 						if (saveJson)
@@ -466,20 +466,20 @@ namespace ESBreakerCLI
 						}
 						item["assign"] = currentAssign;
 						item["jp_text"] = innerInformation.Name;
-						item["en_text"] = "";
+						item["tr_text"] = "";
 						item["jp_explain"] = innerInformation.Explain;
-						item["en_explain"] = "";
+						item["tr_explain"] = "";
 						if (savedItem != default(JsonObject))
 						{
-							if (savedItem["en_text"] != "")
+							if (savedItem["tr_text"] != "")
 							{
-								innerInformation.Name = savedItem["en_text"];
-								item["en_text"] = savedItem["en_text"];
+								innerInformation.Name = savedItem["tr_text"];
+								item["tr_text"] = savedItem["tr_text"];
 							}
-							if (savedItem["en_explain"] != "")
+							if (savedItem["tr_explain"] != "")
 							{
-								innerInformation.Explain = savedItem["en_explain"];
-								item["en_explain"] = savedItem["en_explain"];
+								innerInformation.Explain = savedItem["tr_explain"];
+								item["tr_explain"] = savedItem["tr_explain"];
 							}
 						}
 						if (saveJson)
@@ -548,20 +548,20 @@ namespace ESBreakerCLI
 						}
 						item["assign"] = currentAssign;
 						item["jp_text"] = innerInformation.Name;
-						item["en_text"] = "";
+						item["tr_text"] = "";
 						item["jp_explain"] = innerInformation.Explain;
-						item["en_explain"] = "";
+						item["tr_explain"] = "";
 						if (savedItem != default(JsonObject))
 						{
-							if (savedItem["en_text"] != "")
+							if (savedItem["tr_text"] != "")
 							{
-								innerInformation.Name = savedItem["en_text"];
-								item["en_text"] = savedItem["en_text"];
+								innerInformation.Name = savedItem["tr_text"];
+								item["tr_text"] = savedItem["tr_text"];
 							}
-							if (savedItem["en_explain"] != "")
+							if (savedItem["tr_explain"] != "")
 							{
-								innerInformation.Explain = savedItem["en_explain"];
-								item["en_explain"] = savedItem["en_explain"];
+								innerInformation.Explain = savedItem["tr_explain"];
+								item["tr_explain"] = savedItem["tr_explain"];
 							}
 						}
 						if (saveJson)
