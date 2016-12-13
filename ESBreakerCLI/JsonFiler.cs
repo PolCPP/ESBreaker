@@ -38,14 +38,16 @@ namespace ESBreakerCLI
 			{
 				Directory.CreateDirectory(path);
 			}
-			var filePath = Path.Combine(JsonFiler.path, fileName + extension);			
-
-			var data = prettyPrint ? contents.ToJsonPrettyPrintString() : contents.ToJsonString();
-			if (!data.EndsWith(Environment.NewLine, StringComparison.Ordinal))
+			var filePath = Path.Combine(JsonFiler.path, fileName + extension);
+			if (contents.Count != 0)
 			{
-				data += '\n';
-			}
-			File.WriteAllText(filePath, data);
+				var data = prettyPrint ? contents.ToJsonPrettyPrintString() : contents.ToJsonString();
+				if (!data.EndsWith(Environment.NewLine, StringComparison.Ordinal))
+				{
+					data += '\n';
+				}
+				File.WriteAllText(filePath, data);
+			}			        
 		}
 	}
 }
