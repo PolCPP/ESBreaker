@@ -73,7 +73,6 @@
     <None Include="Databases\yq0QT0IqvC7s8Jxuy9AOdvsS93YSHHjX\M8W2ZOnWZA--.dat">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="README.MD" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Databases\" />

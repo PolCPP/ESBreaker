@@ -66,17 +66,12 @@ namespace ESBreakerCLI
 								BindingFlags.NonPublic);
 			dictFormat = (Dictionary<TextID, Contents.Text.Base.Format>)field.GetValue(null);
 
-			foreach (KeyValuePair<TextID, Contents.Text.Base.Format> item in dictFormat)
+			for (int i = 0; i < format.Information.Length; i++)
 			{
-				var result = Serializer.SerializeMemory<Contents.Text.Base.Format>(item.Value);
-				for (int i = 0; i < format.Information.Length; i++)
+				var assignID = (TextID)format.Information[i].AssignID;
+				if (dictFormat.ContainsKey(assignID))
 				{
-					TextID assignID = (TextID)format.Information[i].AssignID;
-					if (assignID == item.Key)
-					{
-						format.Information[i].Buffers = result;
-						break;
-					}
+					format.Information[i].Buffers = Serializer.SerializeMemory<Contents.Text.Base.Format>(dictFormat[assignID]);
 				}
 			}
 
@@ -96,17 +91,12 @@ namespace ESBreakerCLI
 								BindingFlags.NonPublic);
 			dictFormat = (Dictionary<StoryID, Contents.Story.Base.Format>)field.GetValue(null);
 
-			foreach (KeyValuePair<StoryID, Contents.Story.Base.Format> item in dictFormat)
+			for (int i = 0; i < format.Information.Length; i++)
 			{
-				var result = Serializer.SerializeMemory<Contents.Story.Base.Format>(item.Value);
-				for (int i = 0; i < format.Information.Length; i++)
+				var assignID = (StoryID)format.Information[i].AssignID;
+				if (dictFormat.ContainsKey(assignID))
 				{
-					StoryID assignID = (StoryID)format.Information[i].AssignID;
-					if (assignID == item.Key)
-					{
-						format.Information[i].Buffers = result;
-						break;
-					}
+					format.Information[i].Buffers = Serializer.SerializeMemory<Contents.Story.Base.Format>(dictFormat[assignID]);
 				}
 			}
 
