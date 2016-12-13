@@ -10,7 +10,7 @@ namespace ESBreakerCLI
 	public class DatabaseFiler
 	{
 		string dbDir = Path.Combine(System.IO.Path.GetDirectoryName(
-										Assembly.GetEntryAssembly().Location), "databases");
+										Assembly.GetEntryAssembly().Location), "Databases");
 		string saveDir = Path.Combine(System.IO.Path.GetDirectoryName(
 										Assembly.GetEntryAssembly().Location), "output");
 		
