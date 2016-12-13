@@ -43,7 +43,7 @@ namespace ESBreakerCLI
 			var data = prettyPrint ? contents.ToJsonPrettyPrintString() : contents.ToJsonString();
 			if (!data.EndsWith(Environment.NewLine, StringComparison.Ordinal))
 			{
-				data += Environment.NewLine;
+				data += '\n';
 			}
 			File.WriteAllText(filePath, data);
 		}
