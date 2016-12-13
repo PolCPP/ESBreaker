@@ -5,14 +5,13 @@ namespace ESBreakerCLI
 {
 	public static class ParseStoryStrategies
 	{
-		public static JsonArray Text(object source, JsonArray existingData)
+		public static JsonArray Text(object source, JsonArray existingData, bool saveJson)
 		{
 			JsonArray data = new JsonArray();
 
 			Contents.Story.Text.Format storyEventFormat = (Contents.Story.Text.Format)source;
 			if (storyEventFormat != null)
 			{
-
 				foreach (Contents.Story.Text.Information information in storyEventFormat.Information)
 				{
 					int i = 0;
@@ -51,7 +50,10 @@ namespace ESBreakerCLI
 							}
 						}
 						i++;
-						data.Add(item);
+						if (saveJson)
+						{
+							data.Add(item);
+						}
 					}
 
 				}
@@ -59,7 +61,7 @@ namespace ESBreakerCLI
 			return data;
 		}
 
-		public static JsonArray Title(object source, JsonArray existingData)
+		public static JsonArray Title(object source, JsonArray existingData, bool saveJson)
 		{
 			JsonArray data = new JsonArray();
 
@@ -97,7 +99,10 @@ namespace ESBreakerCLI
 							}
 						}
 						i++;
-						data.Add(item);
+						if (saveJson)
+						{
+							data.Add(item);
+						}
 					}
 
 				}

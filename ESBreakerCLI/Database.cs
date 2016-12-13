@@ -8,11 +8,12 @@ namespace ESBreakerCLI
 {
 	public class Database
 	{
-		bool prettyPrint = true;
+		bool saveJson;		
+		bool prettyPrint;
+		bool saveDatabase;
+
 		Dictionary<ContentsID, DatabaseFiler> files = new Dictionary<ContentsID, DatabaseFiler>();
-		Dictionary<Type, Func<object, JsonArray, JsonArray>> parseStrategies = new Dictionary<Type, Func<object, JsonArray, JsonArray>>();
-
-
+		Dictionary<Type, Func<object, JsonArray, bool, JsonArray>> parseStrategies = new Dictionary<Type, Func<object, JsonArray, bool, JsonArray>>();
 
 		List<ContentsID> supportedTypes = new List<ContentsID>
 		{
@@ -26,13 +27,23 @@ namespace ESBreakerCLI
 			{ ContentsID.Story, typeof(Contents.Story.Database) },
 		};
 
-		public Database(bool prettyPrint)
+		public Database(bool saveJson, bool prettyPrint, bool saveDatabase)
 		{
+			this.saveJson = saveJson;
 			this.prettyPrint = prettyPrint;
+			this.saveDatabase = saveDatabase;
 			this.LoadStrategies();
 		}
 
-		public void InitFromFile()
+		public void Process()
+		{			
+			InitFromFile();
+			Parse();
+			if (saveDatabase) 
+				SaveToFile();
+		}
+
+		void InitFromFile()
 		{
 			foreach (ContentsID currentContent in supportedTypes)
 			{
@@ -47,13 +58,13 @@ namespace ESBreakerCLI
 			}
 		}
 
-		public void SaveToFile()
+		void SaveToFile()
 		{
 			SaveText();
 			SaveStory();
 		}
 
-		public void SaveText()
+		void SaveText()
 		{
 			Console.WriteLine("Generating text patch");
 			var fm = files[ContentsID.Text];
@@ -78,7 +89,7 @@ namespace ESBreakerCLI
 			fm.Save(format);
 		}
 
-		public void SaveStory()
+		void SaveStory()
 		{
 			Console.WriteLine("Generating story patch");
 			var fm = files[ContentsID.Story];
@@ -103,18 +114,19 @@ namespace ESBreakerCLI
 			fm.Save(format);
 		}
 
-		public void Parse()
+		void Parse()
 		{
 			var textTypes = Enum.GetValues(typeof(Contents.TextID));			
-			Func<object, JsonArray, JsonArray> parse;
+			Func<object, JsonArray, bool, JsonArray> parse;
 			foreach (Contents.TextID textType in textTypes)
 			{
 				var format = Contents.Text.Database.Get<Contents.Text.Base.Format>(textType);
 				if (this.parseStrategies.TryGetValue(format.GetType(), out parse))
 				{
-					Console.WriteLine(String.Format("Exporting and updating {0} to json format", textType.ToString()));
-					var output = parse(format, JsonFiler.GetExisting(textType.ToString()));
-					JsonFiler.Store(textType.ToString(), output, prettyPrint);
+					Console.WriteLine(String.Format("Processing {0}", textType.ToString()));
+					var output = parse(format, JsonFiler.GetExisting(textType.ToString()), saveJson);
+					if (saveJson)
+						JsonFiler.Store(textType.ToString(), output, prettyPrint);
 				}
 			}
 
@@ -124,8 +136,8 @@ namespace ESBreakerCLI
 				var format = Contents.Story.Database.Get<Contents.Story.Base.Format>(storyType);
 				if (this.parseStrategies.TryGetValue(format.GetType(), out parse))
 				{
-					Console.WriteLine(String.Format("Exporting and updating {0} to json format", storyType.ToString()));
-					var output = parse(format, JsonFiler.GetExisting(storyType.ToString()));
+					Console.WriteLine(String.Format("Processing {0}", storyType.ToString()));
+					var output = parse(format, JsonFiler.GetExisting(storyType.ToString()), saveJson);
 					JsonFiler.Store(storyType.ToString(), output,prettyPrint);
 				}
 			}

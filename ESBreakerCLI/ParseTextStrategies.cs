@@ -5,7 +5,7 @@ namespace ESBreakerCLI
 {
 	public static class ParseTextStrategies
 	{
-		public static JsonArray UIText(object source, JsonArray existingData)
+		public static JsonArray UIText(object source, JsonArray existingData, bool saveJson)
 		{
 			JsonArray data = new JsonArray();
 			Contents.Text.UI.Format textUIFormat = (Contents.Text.UI.Format)source;
@@ -45,13 +45,15 @@ namespace ESBreakerCLI
 						item["en_text"] = savedItem["en_text"];
 					}
 				}
-				data.Add(item);
-
+				if (saveJson)
+				{
+					data.Add(item);
+				}
 			}
 			return data;
 		}
 
-		public static JsonArray IllustratorText(object source, JsonArray existingData)
+		public static JsonArray IllustratorText(object source, JsonArray existingData, bool saveJson)
 		{
 			JsonArray data = new JsonArray();
 			Contents.Text.Illustrator.Format textUIFormat = (Contents.Text.Illustrator.Format)source;
@@ -91,13 +93,16 @@ namespace ESBreakerCLI
 						item["en_CV"] = savedItem["en_CV"];
 					}
 				}
-				data.Add(item);
+				if (saveJson)
+				{
+					data.Add(item);
+				}
 			}
 			return data;
 		}
 
 
-		public static JsonArray ChipExplain(object source, JsonArray existingData)
+		public static JsonArray ChipExplain(object source, JsonArray existingData, bool saveJson)
 		{
 			JsonArray data = new JsonArray();
 			Contents.Text.ChipExplain.Format chipExplainFormat = (Contents.Text.ChipExplain.Format)source;
@@ -144,12 +149,15 @@ namespace ESBreakerCLI
 						item["en_explainLong"] = savedItem["en_explainLong"];
 					}
 				}
-				data.Add(item);
+				if (saveJson)
+				{
+					data.Add(item);
+				}
 			}
 			return data;
 		}
 
-		public static JsonArray Name(object source, JsonArray existingData)
+		public static JsonArray Name(object source, JsonArray existingData, bool saveJson)
 		{
 			JsonArray data = new JsonArray();
 			Contents.Text.Name.Format textInformationFormat = (Contents.Text.Name.Format)source;
@@ -212,14 +220,17 @@ namespace ESBreakerCLI
 								item["en_text"] = savedItem["en_text"];
 							}
 						}
-						data.Add(item);
+						if (saveJson)
+						{
+							data.Add(item);
+						}
 					}
 				}
 			}
 			return data;
 		}
 
-		public static JsonArray Charged(object source, JsonArray existingData)
+		public static JsonArray Charged(object source, JsonArray existingData, bool saveJson)
 		{
 			JsonArray data = new JsonArray();
 			Contents.Text.Charged.Format textInformationFormat = (Contents.Text.Charged.Format)source;
@@ -282,14 +293,17 @@ namespace ESBreakerCLI
 								item["en_text"] = savedItem["en_text"];
 							}
 						}
-						data.Add(item);
+						if (saveJson)
+						{
+							data.Add(item);
+						}
 					}
 				}
 			}
 			return data;
 		}
 
-		public static JsonArray NGWord(object source, JsonArray existingData)
+		public static JsonArray NGWord(object source, JsonArray existingData, bool saveJson)
 		{
 			JsonArray data = new JsonArray();
 			Contents.Text.NGWord.Format textInformationFormat = (Contents.Text.NGWord.Format)source;
@@ -343,7 +357,10 @@ namespace ESBreakerCLI
 						}
 						item["assign"] = currentAssign;
 						item["text"] = innerInformation.Text;
-						data.Add(item);
+						if (saveJson)
+						{
+							data.Add(item);
+						}
 					}
 				}
 			}
@@ -351,7 +368,7 @@ namespace ESBreakerCLI
 		}
 
 
-		public static JsonArray SeraphyRoom(object source, JsonArray existingData)
+		public static JsonArray SeraphyRoom(object source, JsonArray existingData, bool saveJson)
 		{
 			JsonArray data = new JsonArray();
 			Contents.Text.SeraphyRoom.Format seraphyFormat = (Contents.Text.SeraphyRoom.Format)source;
@@ -384,14 +401,17 @@ namespace ESBreakerCLI
 								item["en_text"] = savedItem["en_text"];
 							}
 						}
-						data.Add(item);
+						if (saveJson)
+						{
+							data.Add(item);
+						}
 					}
 				}
 			}
 			return data;
 		}
 
-		public static JsonArray Item(object source, JsonArray existingData)
+		public static JsonArray Item(object source, JsonArray existingData, bool saveJson)
 		{
 			JsonArray data = new JsonArray();
 			Contents.Text.Item.Format textInformationFormat = (Contents.Text.Item.Format)source;
@@ -462,7 +482,10 @@ namespace ESBreakerCLI
 								item["en_explain"] = savedItem["en_explain"];
 							}
 						}
-						data.Add(item);
+						if (saveJson)
+						{
+							data.Add(item);
+						}
 					}
 				}
 
@@ -470,7 +493,7 @@ namespace ESBreakerCLI
 			return data;
 		}
 
-		public static JsonArray Explain(object source, JsonArray existingData)
+		public static JsonArray Explain(object source, JsonArray existingData, bool saveJson)
 		{
 			JsonArray data = new JsonArray();
 			Contents.Text.Explain.Format textInformationFormat = (Contents.Text.Explain.Format)source;
@@ -541,7 +564,10 @@ namespace ESBreakerCLI
 								item["en_explain"] = savedItem["en_explain"];
 							}
 						}
-						data.Add(item);
+						if (saveJson)
+						{
+							data.Add(item);
+						}
 					}
 				}
 			}

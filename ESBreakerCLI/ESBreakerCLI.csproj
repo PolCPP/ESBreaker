@@ -46,6 +46,9 @@
     <Reference Include="ProtoBuffSerializer">
       <HintPath>lib\ProtoBuffSerializer.dll</HintPath>
     </Reference>
+    <Reference Include="CommandLine">
+      <HintPath>..\packages\CommandLineParser.1.9.71\lib\net45\CommandLine.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Program.cs" />
@@ -73,6 +76,7 @@
     <None Include="Databases\yq0QT0IqvC7s8Jxuy9AOdvsS93YSHHjX\M8W2ZOnWZA--.dat">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Databases\" />
