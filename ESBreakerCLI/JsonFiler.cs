@@ -41,6 +41,10 @@ namespace ESBreakerCLI
 			var filePath = Path.Combine(JsonFiler.path, fileName + extension);			
 
 			var data = prettyPrint ? contents.ToJsonPrettyPrintString() : contents.ToJsonString();
+			if (!data.EndsWith(Environment.NewLine, StringComparison.Ordinal))
+			{
+				data += Environment.NewLine;
+			}
 			File.WriteAllText(filePath, data);
 		}
 	}
