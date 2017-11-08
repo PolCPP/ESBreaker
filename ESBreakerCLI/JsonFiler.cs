@@ -1,14 +1,15 @@
-﻿using System;
+using System;
 using NiceJson;
 using System.IO;
 using System.Reflection;
+using Newtonsoft.Json;
 
 namespace ESBreakerCLI
 {
 	public static class JsonFiler
 	{
 		private static string path = Path.Combine(System.IO.Path.GetDirectoryName(
-										Assembly.GetEntryAssembly().Location), "json");
+		                                          Assembly.GetEntryAssembly().Location), "json");
 
 		private static string extension = ".txt";
 
@@ -32,6 +33,18 @@ namespace ESBreakerCLI
 			return existingData;
 		}
 
+		public static string JsonPrettify(string json)
+		{
+			using (var stringReader = new StringReader(json))
+			using (var stringWriter = new StringWriter())
+			{
+				var jsonReader = new JsonTextReader(stringReader);
+				var jsonWriter = new JsonTextWriter(stringWriter) { Formatting = Formatting.Indented };
+				jsonWriter.WriteToken(jsonReader);
+				return stringWriter.ToString();
+			}
+		}
+
 		public static void Store(string fileName, JsonArray contents, bool prettyPrint)
 		{
 			if (!Directory.Exists(path))
@@ -41,7 +54,7 @@ namespace ESBreakerCLI
 			var filePath = Path.Combine(JsonFiler.path, fileName + extension);
 			if (contents.Count != 0)
 			{
-				var data = prettyPrint ? contents.ToJsonPrettyPrintString() : contents.ToJsonString();
+				var data = prettyPrint ? JsonPrettify(contents.ToJsonString()) : contents.ToJsonString();
 				if (!data.EndsWith(Environment.NewLine, StringComparison.Ordinal))
 				{
 					data += '\n';

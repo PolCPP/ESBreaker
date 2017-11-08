@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Contents;
 using Contents.General;
 using System.IO;

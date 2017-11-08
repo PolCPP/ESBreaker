@@ -1,4 +1,3 @@
-﻿using System;
 using NiceJson;
 
 namespace ESBreakerCLI

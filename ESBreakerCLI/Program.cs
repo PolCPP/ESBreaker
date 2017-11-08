@@ -1,8 +1,5 @@
-﻿using System;
-using Contents;
-using System.Reflection;
+using System;
 using CommandLine;
-using System.Collections.Generic;
 using CommandLine.Text;
 
 namespace ESBreakerCLI
