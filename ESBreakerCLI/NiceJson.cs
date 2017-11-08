@@ -39,40 +39,40 @@ namespace NiceJson
 	[Serializable]
 	public abstract class JsonNode
 	{
-		protected const char PP_IDENT_CHAR = '\t'; //Modify this to spaces or whatever char you want to be the ident one
+		protected const Char PP_IDENT_CHAR = '\t'; //Modify this to spaces or whatever char you want to be the ident one
 		protected const int PP_IDENT_COUNT = 1; //Modify this to be the numbers of IDENT_CHAR x identation
 		protected const bool ESCAPE_SOLIDUS = false; //If you are going to to embed this json in html, you can turn this on ref: http://andowebsit.es/blog/noteslog.com/post/the-solidus-issue/
 
-		protected const char CHAR_CURLY_OPEN = '{';
-		protected const char CHAR_CURLY_CLOSED = '}';
-		protected const char CHAR_SQUARED_OPEN = '[';
-		protected const char CHAR_SQUARED_CLOSED = ']';
+		protected const Char CHAR_CURLY_OPEN = '{';
+		protected const Char CHAR_CURLY_CLOSED = '}';
+		protected const Char CHAR_SQUARED_OPEN = '[';
+		protected const Char CHAR_SQUARED_CLOSED = ']';
 
-		protected const char CHAR_COLON = ':';
-		protected const char CHAR_COMMA = ',';
-		protected const char CHAR_QUOTE = '"';
+		protected const Char CHAR_COLON = ':';
+		protected const Char CHAR_COMMA = ',';
+		protected const Char CHAR_QUOTE = '"';
 
-		protected const char CHAR_NULL_LITERAL = 'n';
-		protected const char CHAR_TRUE_LITERAL = 't';
-		protected const char CHAR_FALSE_LITERAL = 'f';
+		protected const Char CHAR_NULL_LITERAL = 'n';
+		protected const Char CHAR_TRUE_LITERAL = 't';
+		protected const Char CHAR_FALSE_LITERAL = 'f';
 
-		protected const char CHAR_SPACE = ' ';
+		protected const Char CHAR_SPACE = ' ';
 
-		protected const char CHAR_BS = '\b';
-		protected const char CHAR_FF = '\f';
-		protected const char CHAR_RF = '\r';
-		protected const char CHAR_NL = '\n';
-		protected const char CHAR_HT = '\t';
-		protected const char CHAR_ESCAPE = '\\';
-		protected const char CHAR_SOLIDUS = '/';
-		protected const char CHAR_ESCAPED_QUOTE = '\"';
+		protected const Char CHAR_BS = '\b';
+		protected const Char CHAR_FF = '\f';
+		protected const Char CHAR_RF = '\r';
+		protected const Char CHAR_NL = '\n';
+		protected const Char CHAR_HT = '\t';
+		protected const Char CHAR_ESCAPE = '\\';
+		protected const Char CHAR_SOLIDUS = '/';
+		protected const Char CHAR_ESCAPED_QUOTE = '\"';
 
-		protected const char CHAR_N = 'n';
-		protected const char CHAR_R = 'r';
-		protected const char CHAR_B = 'b';
-		protected const char CHAR_T = 't';
-		protected const char CHAR_F = 'f';
-		protected const char CHAR_U = 'u';
+		protected const Char CHAR_N = 'n';
+		protected const Char CHAR_R = 'r';
+		protected const Char CHAR_B = 'b';
+		protected const Char CHAR_T = 't';
+		protected const Char CHAR_F = 'f';
+		protected const Char CHAR_U = 'u';
 
 		protected const string STRING_ESCAPED_BS = "\\b";
 		protected const string STRING_ESCAPED_FF = "\\f";
