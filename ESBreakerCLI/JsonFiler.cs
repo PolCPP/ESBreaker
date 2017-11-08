@@ -39,7 +39,7 @@ namespace ESBreakerCLI
 			using (var stringWriter = new StringWriter())
 			{
 				var jsonReader = new JsonTextReader(stringReader);
-				var jsonWriter = new JsonTextWriter(stringWriter) { Formatting = Formatting.Indented };
+				var jsonWriter = new JsonTextWriter(stringWriter) { Formatting = Formatting.Indented, Indentation = 1, IndentChar = '\t' };
 				jsonWriter.WriteToken(jsonReader);
 				return stringWriter.ToString();
 			}
