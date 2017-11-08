@@ -61,19 +61,19 @@
     <Compile Include="ParseStoryStrategies.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Databases\2cgR3iFOi4SuqNXs0wAYxkps4vI5Y6XB\M8W2ZOnWZA--.dat">
+    <None Include="Databases\2cgR3iFOi4SuqNXs0wAYxkps4vI5Y6XB\McOzZe3WZQ--.dat">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Databases\hOxogQ43AYuYE4T2QExzg5V5EhcQkxSV\M8W2a_.WZA--.dat">
+    <None Include="Databases\hOxogQ43AYuYE4T2QExzg5V5EhcQkxSV\McO1aerWZQ--.dat">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Databases\t2I4C2vaaNAX5mq6ztKThAuSgejBWr8C\M8W2ZOnWZA--.dat">
+    <None Include="Databases\t2I4C2vaaNAX5mq6ztKThAuSgejBWr8C\McOzZe3WZQ--.dat">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Databases\ToY1828HsafEBKw1Jdfi8443peG0CV4z\M8W2ZOnWZA--.dat">
+    <None Include="Databases\ToY1828HsafEBKw1Jdfi8443peG0CV4z\McOzZe3WZQ--.dat">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Databases\yq0QT0IqvC7s8Jxuy9AOdvsS93YSHHjX\M8W2ZOnWZA--.dat">
+    <None Include="Databases\yq0QT0IqvC7s8Jxuy9AOdvsS93YSHHjX\McOzZe3WZQ--.dat">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="packages.config" />
