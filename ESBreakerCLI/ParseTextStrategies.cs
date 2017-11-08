@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using NiceJson;
 
 namespace ESBreakerCLI
@@ -39,7 +39,7 @@ namespace ESBreakerCLI
 				item["tr_text"] = "";
 				if (savedItem != default(JsonObject))
 				{
-					if (savedItem["tr_text"] != "")
+					if (!String.IsNullOrEmpty(savedItem["tr_text"]))
 					{
 						information.Text = savedItem["tr_text"];
 						item["tr_text"] = savedItem["tr_text"];
@@ -82,12 +82,12 @@ namespace ESBreakerCLI
 				item["tr_name"] = "";
 				if (savedItem != default(JsonObject))
 				{
-					if (savedItem["tr_name"] != "")
+					if (!String.IsNullOrEmpty(savedItem["tr_name"]))
 					{
 						information.Name = savedItem["tr_name"];
 						item["tr_name"] = savedItem["tr_name"];
 					}
-					if (savedItem["tr_CV"] != "")
+					if (!String.IsNullOrEmpty(savedItem["tr_CV"]))
 					{
 						information.CV = savedItem["tr_CV"];
 						item["tr_CV"] = savedItem["tr_CV"];
@@ -138,12 +138,12 @@ namespace ESBreakerCLI
 				item["tr_explainLong"] = "";
 				if (savedItem != default(JsonObject))
 				{
-					if (savedItem["tr_explainShort"] != "")
+					if (!String.IsNullOrEmpty(savedItem["tr_explainShort"]))
 					{
 						information.ExplainLong = savedItem["tr_explainShort"];
 						item["tr_explainShort"] = savedItem["tr_explainShort"];
 					}
-					if (savedItem["tr_explainLong"] != "")
+					if (!String.IsNullOrEmpty(savedItem["tr_explainLong"]))
 					{
 						information.ExplainLong = savedItem["tr_explainLong"];
 						item["tr_explainLong"] = savedItem["tr_explainLong"];
@@ -214,7 +214,7 @@ namespace ESBreakerCLI
 						item["tr_text"] = "";
 						if (savedItem != default(JsonObject))
 						{
-							if (savedItem["tr_text"] != "")
+							if (!String.IsNullOrEmpty(savedItem["tr_text"]))
 							{
 								innerInformation.Name = savedItem["tr_text"];
 								item["tr_text"] = savedItem["tr_text"];
@@ -287,7 +287,7 @@ namespace ESBreakerCLI
 						item["tr_text"] = "";
 						if (savedItem != default(JsonObject))
 						{
-							if (savedItem["tr_text"] != "")
+							if (!String.IsNullOrEmpty(savedItem["tr_text"]))
 							{
 								innerInformation.Name = savedItem["tr_text"];
 								item["tr_text"] = savedItem["tr_text"];
@@ -395,7 +395,7 @@ namespace ESBreakerCLI
 						item["tr_text"] = "";
 						if (savedItem != default(JsonObject))
 						{
-							if (savedItem["tr_text"] != "")
+							if (!String.IsNullOrEmpty(savedItem["tr_text"]))
 							{
 								innerInformation.Text = savedItem["tr_text"];
 								item["tr_text"] = savedItem["tr_text"];
@@ -471,12 +471,12 @@ namespace ESBreakerCLI
 						item["tr_explain"] = "";
 						if (savedItem != default(JsonObject))
 						{
-							if (savedItem["tr_text"] != "")
+							if (!String.IsNullOrEmpty(savedItem["tr_text"]))
 							{
 								innerInformation.Name = savedItem["tr_text"];
 								item["tr_text"] = savedItem["tr_text"];
 							}
-							if (savedItem["tr_explain"] != "")
+							if (!String.IsNullOrEmpty(savedItem["tr_explain"]))
 							{
 								innerInformation.Explain = savedItem["tr_explain"];
 								item["tr_explain"] = savedItem["tr_explain"];
@@ -553,12 +553,12 @@ namespace ESBreakerCLI
 						item["tr_explain"] = "";
 						if (savedItem != default(JsonObject))
 						{
-							if (savedItem["tr_text"] != "")
+							if (!String.IsNullOrEmpty(savedItem["tr_text"]))
 							{
 								innerInformation.Name = savedItem["tr_text"];
 								item["tr_text"] = savedItem["tr_text"];
 							}
-							if (savedItem["tr_explain"] != "")
+							if (!String.IsNullOrEmpty(savedItem["tr_explain"]))
 							{
 								innerInformation.Explain = savedItem["tr_explain"];
 								item["tr_explain"] = savedItem["tr_explain"];
