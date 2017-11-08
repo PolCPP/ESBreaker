@@ -47,7 +47,7 @@ namespace ESBreakerCLI
 					data += '\n';
 				}
 				File.WriteAllText(filePath, data);
-			}			        
+			}
 		}
 	}
 }

@@ -299,7 +299,7 @@ namespace NiceJson
 			return result.ToString();
 		}
 
-		//setter implicit casting 
+		//setter implicit casting
 
 		public static implicit operator JsonNode(string value)
 		{
@@ -336,7 +336,7 @@ namespace NiceJson
 			return new JsonBasic(value);
 		}
 
-		//getter implicit casting 
+		//getter implicit casting
 
 		public static implicit operator string(JsonNode value)
 		{

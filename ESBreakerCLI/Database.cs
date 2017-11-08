@@ -8,7 +8,7 @@ namespace ESBreakerCLI
 {
 	public class Database
 	{
-		bool saveJson;		
+		bool saveJson;
 		bool prettyPrint;
 		bool saveDatabase;
 
@@ -36,10 +36,10 @@ namespace ESBreakerCLI
 		}
 
 		public void Process()
-		{			
+		{
 			InitFromFile();
 			Parse();
-			if (saveDatabase) 
+			if (saveDatabase)
 				SaveToFile();
 		}
 
@@ -116,7 +116,7 @@ namespace ESBreakerCLI
 
 		void Parse()
 		{
-			var textTypes = Enum.GetValues(typeof(Contents.TextID));			
+			var textTypes = Enum.GetValues(typeof(Contents.TextID));
 			Func<object, JsonArray, bool, JsonArray> parse;
 			foreach (Contents.TextID textType in textTypes)
 			{
@@ -151,7 +151,7 @@ namespace ESBreakerCLI
 			parseStrategies.Add(typeof(Contents.Text.Name.Format), ParseTextStrategies.Name);
 			// Adding another single Text.Name file was too hard? That you decided to copypasta it into text charged?
 			parseStrategies.Add(typeof(Contents.Text.Charged.Format), ParseTextStrategies.Charged);
-			// Yay! more copypasta...why are we even exporting this? Beats me. At least we laugh a bit with poor Teemo 
+			// Yay! more copypasta...why are we even exporting this? Beats me. At least we laugh a bit with poor Teemo
 			// who's censored on PSO.
 			parseStrategies.Add(typeof(Contents.Text.NGWord.Format), ParseTextStrategies.NGWord);
 			parseStrategies.Add(typeof(Contents.Text.SeraphyRoom.Format), ParseTextStrategies.SeraphyRoom);

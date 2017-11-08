@@ -13,7 +13,7 @@ namespace ESBreakerCLI
 										Assembly.GetEntryAssembly().Location), "Databases");
 		string saveDir = Path.Combine(System.IO.Path.GetDirectoryName(
 										Assembly.GetEntryAssembly().Location), "output");
-		
+
 		// Seriously what the heck is going on with those names? Security through obscurity? Please!
 		readonly string[] directories = new string[] {  "hOxogQ43AYuYE4T2QExzg5V5EhcQkxSV",
 														"2cgR3iFOi4SuqNXs0wAYxkps4vI5Y6XB",
@@ -22,7 +22,7 @@ namespace ESBreakerCLI
 														"t2I4C2vaaNAX5mq6ztKThAuSgejBWr8C"
 		};
 
-		// Note: We can't take "MASK_KEY" static vars from Contents.Base.Database because 
+		// Note: We can't take "MASK_KEY" static vars from Contents.Base.Database because
 		// it fails since it tries to run native android code via Android.Datapath
 		// Right now we initialize it on LoadMask taking the one from Savedata.Filer which
 		// happens to be the same. This may change on the future
@@ -38,7 +38,7 @@ namespace ESBreakerCLI
 			{
 				throw new IOException(String.Format("Directory {0} for this type of data does not exist:", fileDir));
 			}
-			// Their filename system way just makes my head hurt since 
+			// Their filename system way just makes my head hurt since
 			// i doubt it's going to have more than a single file just pick the first one on each dir.
 			string file =
 				new DirectoryInfo(fileDir).GetFiles()
@@ -56,7 +56,7 @@ namespace ESBreakerCLI
 
 			// This is a temporal init way of the mask, using reflection against Savedata.Filer
 			// which uses the same mask.
-			// Since for this filer is legacy it may have to be replaced at some point with a 
+			// Since for this filer is legacy it may have to be replaced at some point with a
 			// file with the key that won't be on the repo
 			LoadMask();
 		}
