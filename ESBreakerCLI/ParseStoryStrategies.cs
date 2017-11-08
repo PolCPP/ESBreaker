@@ -1,4 +1,5 @@
 using NiceJson;
+using System;
 
 namespace ESBreakerCLI
 {
@@ -37,12 +38,12 @@ namespace ESBreakerCLI
 						item["fileID"] = information.FileID;
 						if (savedItem != default(JsonObject))
 						{
-							if (savedItem["tr_name"] != "")
+							if (!String.IsNullOrEmpty(savedItem["tr_name"]))
 							{
 								param.Name = savedItem["tr_name"];
 								item["tr_name"] = savedItem["tr_name"];
 							}
-							if (savedItem["tr_text"] != "")
+							if (!String.IsNullOrEmpty(savedItem["tr_text"]))
 							{
 								param.Text = savedItem["tr_text"];
 								item["tr_text"] = savedItem["tr_text"];
@@ -91,7 +92,7 @@ namespace ESBreakerCLI
 						item["tr_title"] = "";
 						if (savedItem != default(JsonObject))
 						{
-							if (savedItem["tr_title"] != "")
+							if (!String.IsNullOrEmpty(savedItem["tr_title"]))
 							{
 								information.TitleList[idx] = savedItem["tr_title"];
 								item["tr_title"] = savedItem["tr_title"];

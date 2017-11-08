@@ -44,7 +44,7 @@ namespace ESBreakerCLI
 				new DirectoryInfo(fileDir).GetFiles()
 				  .Select(fi => fi.Name)
 				  .FirstOrDefault();
-			if (file == "")
+			if (String.IsNullOrEmpty(file))
 			{
 				throw new IOException(String.Format("There isn't anything in the target dir {0}", fileDir));
 			}
