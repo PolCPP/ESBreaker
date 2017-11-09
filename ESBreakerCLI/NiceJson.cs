@@ -95,9 +95,11 @@ namespace NiceJson
 		{
 			get
 			{
-				if (this is JsonObject)
+				JsonObjectCollection JOC = this as JsonObjectCollection;
+
+				if (JOC != null)
 				{
-					return ((JsonObject)this)[key];
+					return JOC[key];
 				}
 				else
 				{
@@ -107,9 +109,10 @@ namespace NiceJson
 
 			set
 			{
-				if (this is JsonObject)
+				JsonObjectCollection JOC = this as JsonObjectCollection;
+
 				{
-					((JsonObject)this)[key] = value;
+					JOC[key] = value;
 				}
 			}
 		}
@@ -118,9 +121,11 @@ namespace NiceJson
 		{
 			get
 			{
-				if (this is JsonArray)
+				JsonArrayCollection JAC = this as JsonArrayCollection;
+
+				if (JAC != null)
 				{
-					return ((JsonArray)this)[index];
+					return JAC[index];
 				}
 				else
 				{
@@ -130,18 +135,22 @@ namespace NiceJson
 
 			set
 			{
-				if (this is JsonArray)
+				JsonArrayCollection JAC = this as JsonArrayCollection;
+
+				if (JAC != null)
 				{
-					((JsonArray)this)[index] = value;
+					JAC[index] = value;
 				}
 			}
 		}
 
 		public bool ContainsKey(string key)
 		{
-			if (this is JsonObject)
+			JsonObjectCollection JOC = this as JsonObjectCollection;
+
+			if (JOC != null)
 			{
-				return ((JsonObject)this).ContainsKey(key);
+				return JOC.ContainsKey(key);
 			}
 			else
 			{
@@ -152,11 +161,13 @@ namespace NiceJson
 		//escaping logic
 
 		//Escaping/Unescaping logic
-		protected static string EscapeString(string s)
+		protected static string EscapeString(string input)
 		{
 			StringBuilder result = new StringBuilder();
+			if (String.IsNullOrWhiteSpace(input))
+				return "";
 
-			foreach (char c in s)
+			foreach (char c in input)
 			{
 				switch (c)
 				{
@@ -212,7 +223,7 @@ namespace NiceJson
 					default:
 						if (c < CHAR_SPACE)
 						{
-							result.Append(STRING_ESCAPED_UNICODE_INIT + Convert.ToByte(c).ToString("x2").ToUpper());
+							result.Append(STRING_ESCAPED_UNICODE_INIT + Convert.ToByte(c).ToString("x2", CultureInfo.InvariantCulture).ToUpper(CultureInfo.InvariantCulture));
 						}
 						else
 						{
@@ -225,31 +236,34 @@ namespace NiceJson
 			return result.ToString();
 		}
 
-		protected static string UnescapeString(string s)
+		protected static string UnescapeString(string Input)
 		{
-			StringBuilder result = new StringBuilder(s.Length);
+			if (String.IsNullOrWhiteSpace(Input))
+				return "";
 
-			for (int i = 0; i < s.Length; i++)
+			StringBuilder result = new StringBuilder(Input.Length);
+
+			for (int i = 0; i < Input.Length; i++)
 			{
-				if (s[i] == CHAR_ESCAPE)
+				if (Input[i] == CHAR_ESCAPE)
 				{
 					i++;
 
-					switch (s[i])
+					switch (Input[i])
 					{
 						case CHAR_ESCAPE:
 							{
-								result.Append(s[i]);
+								result.Append(Input[i]);
 							}
 							break;
 						case CHAR_SOLIDUS:
 							{
-								result.Append(s[i]);
+								result.Append(Input[i]);
 							}
 							break;
 						case CHAR_ESCAPED_QUOTE:
 							{
-								result.Append(s[i]);
+								result.Append(Input[i]);
 							}
 							break;
 						case CHAR_N:
@@ -279,20 +293,20 @@ namespace NiceJson
 							break;
 						case CHAR_U:
 							{
-								result.Append((char)int.Parse(s.Substring(i + 1, 4), NumberStyles.AllowHexSpecifier));
+								result.Append((char)int.Parse(Input.Substring(i + 1, 4), NumberStyles.AllowHexSpecifier, CultureInfo.InvariantCulture));
 								i = i + 4;
 							}
 							break;
 						default:
 							{
-								result.Append(s[i]);
+								result.Append(Input[i]);
 							}
 							break;
 					}
 				}
 				else
 				{
-					result.Append(s[i]);
+					result.Append(Input[i]);
 				}
 			}
 
@@ -352,38 +366,38 @@ namespace NiceJson
 
 		public static implicit operator int(JsonNode value)
 		{
-			return (int)Convert.ChangeType(((JsonBasic)value).ValueObject, typeof(int));
+			return (int)Convert.ChangeType(((JsonBasic)value).ValueObject, typeof(int), CultureInfo.InvariantCulture);
 		}
 
 		public static implicit operator long(JsonNode value)
 		{
-			return (long)Convert.ChangeType(((JsonBasic)value).ValueObject, typeof(long));
+			return (long)Convert.ChangeType(((JsonBasic)value).ValueObject, typeof(long), CultureInfo.InvariantCulture);
 		}
 
 		public static implicit operator float(JsonNode value)
 		{
-			return (float)Convert.ChangeType(((JsonBasic)value).ValueObject, typeof(float));
+			return (float)Convert.ChangeType(((JsonBasic)value).ValueObject, typeof(float), CultureInfo.InvariantCulture);
 		}
 
 		public static implicit operator double(JsonNode value)
 		{
-			return (double)Convert.ChangeType(((JsonBasic)value).ValueObject, typeof(double));
+			return (double)Convert.ChangeType(((JsonBasic)value).ValueObject, typeof(double), CultureInfo.InvariantCulture);
 		}
 
 		public static implicit operator decimal(JsonNode value)
 		{
-			return (decimal)Convert.ChangeType(((JsonBasic)value).ValueObject, typeof(decimal));
+			return (decimal)Convert.ChangeType(((JsonBasic)value).ValueObject, typeof(decimal), CultureInfo.InvariantCulture);
 		}
 
 		public static implicit operator bool(JsonNode value)
 		{
-			return (bool)Convert.ChangeType(((JsonBasic)value).ValueObject, typeof(bool));
+			return (bool)Convert.ChangeType(((JsonBasic)value).ValueObject, typeof(bool), CultureInfo.InvariantCulture);
 		}
 
 		//Parsing logic
-		public static JsonNode ParseJsonString(string jsonString)
+		public static JsonNode ParseJsonString(string value)
 		{
-			return ParseJsonPart(RemoveNonTokenChars(jsonString));
+			return ParseJsonPart(RemoveNonTokenChars(value));
 		}
 
 		private static JsonNode ParseJsonPart(string jsonPart)
@@ -399,7 +413,7 @@ namespace NiceJson
 			{
 				case JsonNode.CHAR_CURLY_OPEN:
 					{
-						JsonObject jsonObject = new JsonObject();
+						JsonObjectCollection JsonObjectCollection = new JsonObjectCollection();
 						List<string> splittedParts = SplitJsonParts(jsonPart.Substring(1, jsonPart.Length - 2));
 
 						string[] keyValueParts = new string[2];
@@ -408,25 +422,25 @@ namespace NiceJson
 							keyValueParts = SplitKeyValuePart(keyValuePart);
 							if (keyValueParts[0] != null)
 							{
-								jsonObject[JsonNode.UnescapeString(keyValueParts[0])] = ParseJsonPart(keyValueParts[1]);
+								JsonObjectCollection[JsonNode.UnescapeString(keyValueParts[0])] = ParseJsonPart(keyValueParts[1]);
 							}
 						}
-						jsonPartValue = jsonObject;
+						jsonPartValue = JsonObjectCollection;
 					}
 					break;
 				case JsonNode.CHAR_SQUARED_OPEN:
 					{
-						JsonArray jsonArray = new JsonArray();
+						JsonArrayCollection JsonArrayCollection = new JsonArrayCollection();
 						List<string> splittedParts = SplitJsonParts(jsonPart.Substring(1, jsonPart.Length - 2));
 
 						foreach (string part in splittedParts)
 						{
 							if (part.Length > 0)
 							{
-								jsonArray.Add(ParseJsonPart(part));
+								JsonArrayCollection.Add(ParseJsonPart(part));
 							}
 						}
-						jsonPartValue = jsonArray;
+						jsonPartValue = JsonArrayCollection;
 					}
 					break;
 				case JsonNode.CHAR_QUOTE:
@@ -723,7 +737,7 @@ namespace NiceJson
 	}
 
 	[Serializable]
-	public class JsonObject : JsonNode, IEnumerable
+	public class JsonObjectCollection : JsonNode, IEnumerable
 	{
 		private Dictionary<string, JsonNode> m_dictionary = new Dictionary<string, JsonNode>();
 
@@ -842,7 +856,7 @@ namespace NiceJson
 	}
 
 	[Serializable]
-	public class JsonArray : JsonNode, IEnumerable<JsonNode>
+	public class JsonArrayCollection : JsonNode, IEnumerable<JsonNode>
 	{
 		private List<JsonNode> m_list = new List<JsonNode>();
 

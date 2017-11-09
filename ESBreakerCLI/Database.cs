@@ -3,6 +3,7 @@ using Contents;
 using System.Collections.Generic;
 using System.Reflection;
 using NiceJson;
+using System.Globalization;
 
 namespace ESBreakerCLI
 {
@@ -13,7 +14,7 @@ namespace ESBreakerCLI
 		bool saveDatabase;
 
 		Dictionary<ContentsID, DatabaseFiler> files = new Dictionary<ContentsID, DatabaseFiler>();
-		Dictionary<Type, Func<object, JsonArray, bool, JsonArray>> parseStrategies = new Dictionary<Type, Func<object, JsonArray, bool, JsonArray>>();
+		Dictionary<Type, Func<object, JsonArrayCollection, bool, JsonArrayCollection>> parseStrategies = new Dictionary<Type, Func<object, JsonArrayCollection, bool, JsonArrayCollection>>();
 
 		List<ContentsID> supportedTypes = new List<ContentsID>
 		{
@@ -117,13 +118,13 @@ namespace ESBreakerCLI
 		void Parse()
 		{
 			var textTypes = Enum.GetValues(typeof(Contents.TextID));
-			Func<object, JsonArray, bool, JsonArray> parse;
+			Func<object, JsonArrayCollection, bool, JsonArrayCollection> parse;
 			foreach (Contents.TextID textType in textTypes)
 			{
 				var format = Contents.Text.Database.Get<Contents.Text.Base.Format>(textType);
 				if (this.parseStrategies.TryGetValue(format.GetType(), out parse))
 				{
-					Console.WriteLine(String.Format("Processing {0}", textType.ToString()));
+					Console.WriteLine(String.Format(CultureInfo.InvariantCulture, "Processing {0}", textType.ToString()));
 					var output = parse(format, JsonFiler.GetExisting(textType.ToString()), saveJson);
 					if (saveJson)
 						JsonFiler.Store(textType.ToString(), output, prettyPrint);
@@ -136,7 +137,7 @@ namespace ESBreakerCLI
 				var format = Contents.Story.Database.Get<Contents.Story.Base.Format>(storyType);
 				if (this.parseStrategies.TryGetValue(format.GetType(), out parse))
 				{
-					Console.WriteLine(String.Format("Processing {0}", storyType.ToString()));
+					Console.WriteLine(String.Format(CultureInfo.InvariantCulture, "Processing {0}", storyType.ToString()));
 					var output = parse(format, JsonFiler.GetExisting(storyType.ToString()), saveJson);
 					JsonFiler.Store(storyType.ToString(), output,prettyPrint);
 				}

@@ -4,6 +4,7 @@ using Contents.General;
 using System.IO;
 using System.Reflection;
 using System.Linq;
+using System.Globalization;
 
 namespace ESBreakerCLI
 {
@@ -36,7 +37,7 @@ namespace ESBreakerCLI
 			var saveFileDir = Path.Combine(saveDir, directories[fileType]);
 			if (!Directory.Exists(fileDir))
 			{
-				throw new IOException(String.Format("Directory {0} for this type of data does not exist:", fileDir));
+				throw new IOException(String.Format(CultureInfo.InvariantCulture, "Directory {0} for this type of data does not exist:", fileDir));
 			}
 			// Their filename system way just makes my head hurt since
 			// i doubt it's going to have more than a single file just pick the first one on each dir.
@@ -46,7 +47,7 @@ namespace ESBreakerCLI
 				  .FirstOrDefault();
 			if (String.IsNullOrEmpty(file))
 			{
-				throw new IOException(String.Format("There isn't anything in the target dir {0}", fileDir));
+				throw new IOException(String.Format(CultureInfo.InvariantCulture, "There isn't anything in the target directory {0}", fileDir));
 			}
 			workFile = Path.Combine(fileDir, file);
 			saveFile = Path.Combine(saveFileDir, file);

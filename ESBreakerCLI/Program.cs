@@ -1,6 +1,7 @@
 using System;
 using CommandLine;
 using CommandLine.Text;
+using System.Globalization;
 
 namespace ESBreakerCLI
 {
@@ -36,11 +37,11 @@ namespace ESBreakerCLI
 
 	class MainClass
 	{
-		static readonly string edition = "Honest Investigation";
+		const string edition = "Honest Investigation";
 
 		public static void Main(string[] args)
 		{
-			Console.WriteLine(String.Format("ESBreaker: PSO2es Fan translation Patch tool | {0} edition", edition));
+			Console.WriteLine(String.Format(CultureInfo.InvariantCulture, "ESBreaker: PSO2es Fan translation Patch tool | {0} edition", edition));
 			Console.WriteLine("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-");
 			Console.WriteLine("THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND," +
 			                  " EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, " +
