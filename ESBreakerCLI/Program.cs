@@ -2,6 +2,8 @@ using System;
 using CommandLine;
 using CommandLine.Text;
 using System.Globalization;
+[assembly: CLSCompliant(false)]
+[assembly: System.Runtime.InteropServices.ComVisible(false)]
 
 namespace ESBreakerCLI
 {
