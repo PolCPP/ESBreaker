@@ -465,8 +465,7 @@ namespace NiceJson
 					break;
 				default://it must be a number or it will fail
 					{
-						long longValue = 0;
-						if (long.TryParse(jsonPart, NumberStyles.Any, CultureInfo.InvariantCulture, out longValue))
+						if (long.TryParse(jsonPart, NumberStyles.Any, CultureInfo.InvariantCulture, out long longValue))
 						{
 							if (longValue > int.MaxValue || longValue < int.MinValue)
 							{
@@ -479,8 +478,7 @@ namespace NiceJson
 						}
 						else
 						{
-							decimal decimalValue = 0;
-							if (decimal.TryParse(jsonPart, NumberStyles.Any, CultureInfo.InvariantCulture, out decimalValue))
+							if (decimal.TryParse(jsonPart, NumberStyles.Any, CultureInfo.InvariantCulture, out decimal decimalValue))
 							{
 								jsonPartValue = new JsonBasic(decimalValue);
 							}
