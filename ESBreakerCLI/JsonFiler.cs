@@ -3,6 +3,7 @@ using NiceJson;
 using System.IO;
 using System.Reflection;
 using Newtonsoft.Json;
+using System.Globalization;
 
 namespace ESBreakerCLI
 {
@@ -13,15 +14,15 @@ namespace ESBreakerCLI
 
 		private static string extension = ".txt";
 
-		public static JsonArray GetExisting(string fileName)
+		public static JsonArrayCollection GetExisting(string fileName)
 		{
-			var existingData = new JsonArray();
+			var existingData = new JsonArrayCollection();
 			var filePath = Path.Combine(path, fileName + extension);
 			if (File.Exists(filePath))
 			{
 				try
 				{
-					existingData = (JsonArray)JsonNode.ParseJsonString(File.ReadAllText(filePath));
+					existingData = (JsonArrayCollection)JsonNode.ParseJsonString(File.ReadAllText(filePath));
 				}
 				catch (Exception ex)
 				{
@@ -36,7 +37,7 @@ namespace ESBreakerCLI
 		public static string JsonPrettify(string json)
 		{
 			using (var stringReader = new StringReader(json))
-			using (var stringWriter = new StringWriter())
+			using (var stringWriter = new StringWriter(CultureInfo.InvariantCulture))
 			{
 				var jsonReader = new JsonTextReader(stringReader);
 				var jsonWriter = new JsonTextWriter(stringWriter) { Formatting = Formatting.Indented, Indentation = 1, IndentChar = '\t' };
@@ -45,14 +46,14 @@ namespace ESBreakerCLI
 			}
 		}
 
-		public static void Store(string fileName, JsonArray contents, bool prettyPrint)
+		public static void Store(string fileName, JsonArrayCollection contents, bool prettyPrint)
 		{
 			if (!Directory.Exists(path))
 			{
 				Directory.CreateDirectory(path);
 			}
 			var filePath = Path.Combine(JsonFiler.path, fileName + extension);
-			if (contents.Count != 0)
+			if (contents != null && contents.Count != 0)
 			{
 				var data = prettyPrint ? JsonPrettify(contents.ToJsonString()) : contents.ToJsonString();
 				if (!data.EndsWith(Environment.NewLine, StringComparison.Ordinal))
