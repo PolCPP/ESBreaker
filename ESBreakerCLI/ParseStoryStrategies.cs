@@ -1,5 +1,5 @@
-using NiceJson;
 using System;
+using NiceJson;
 
 namespace ESBreakerCLI
 {
