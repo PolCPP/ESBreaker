@@ -4,6 +4,7 @@ using System.IO;
 using System.Reflection;
 using Newtonsoft.Json;
 using System.Globalization;
+using System.Security;
 
 namespace ESBreakerCLI
 {
@@ -20,14 +21,72 @@ namespace ESBreakerCLI
 			var filePath = Path.Combine(path, fileName + extension);
 			if (File.Exists(filePath))
 			{
+				string FileData = null;
 				try
 				{
-					existingData = (JsonArrayCollection)JsonNode.ParseJsonString(File.ReadAllText(filePath));
+					FileData = File.ReadAllText(filePath);
+				}
+				catch (ArgumentNullException ex)
+				{
+					Console.Error.WriteLine("No Filename");
+					Console.Error.WriteLine(ex.ToString());
+				}
+				catch (ArgumentException ex)
+				{
+					Console.Error.WriteLine("Bad Filename: " + filePath);
+					Console.Error.WriteLine(ex.ToString());
+				}
+				catch (PathTooLongException ex)
+				{
+					Console.Error.WriteLine("Filename too long: "+ filePath);
+					Console.Error.WriteLine(ex.ToString());
+				}
+				catch (DirectoryNotFoundException ex)
+				{
+					Console.Error.WriteLine("Could not find directory: "+ filePath);
+					Console.Error.WriteLine(ex.ToString());
+				}
+				catch (FileNotFoundException ex)
+				{
+					Console.Error.WriteLine("File does not exists: " + filePath);
+					Console.Error.WriteLine(ex.ToString());
+				}
+				catch (IOException ex)
+				{
+					Console.Error.WriteLine("I/O Error while reading: "+ filePath);
+					Console.Error.WriteLine(ex.ToString());
+				}
+				catch (UnauthorizedAccessException ex)
+				{
+					Console.Error.WriteLine("The reading operation is not supported: "+ filePath);
+					Console.Error.WriteLine(ex.ToString());
+				}
+				catch (NotSupportedException ex)
+				{
+					Console.Error.WriteLine("Filepath is invalid: "+ filePath);
+					Console.Error.WriteLine(ex.ToString());
+				}
+				catch (SecurityException ex)
+				{
+					Console.Error.WriteLine("Blocked from reading: "+ filePath);
+					Console.Error.WriteLine(ex.ToString());
 				}
 				catch (Exception ex)
 				{
-					Console.Error.WriteLine("Cannot parse json on " + filePath);
+					Console.Error.WriteLine("Unknown issue with: " + filePath);
 					Console.Error.WriteLine(ex.ToString());
+					throw;
+				}
+
+				try
+				{
+					existingData = (JsonArrayCollection)JsonNode.ParseJsonString(FileData);
+				}
+				catch (Exception ex)
+				{
+					Console.Error.WriteLine("Cannot parse json of " + filePath);
+					Console.Error.WriteLine(ex.ToString());
+					throw;
 				}
 
 			}
