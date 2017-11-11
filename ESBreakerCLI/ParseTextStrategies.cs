@@ -147,7 +147,7 @@ namespace ESBreakerCLI
 				{
 					if (!String.IsNullOrEmpty(savedItem["tr_explainShort"]))
 					{
-						information.ExplainLong = savedItem["tr_explainShort"];
+						information.ExplainShort = savedItem["tr_explainShort"];
 						item["tr_explainShort"] = savedItem["tr_explainShort"];
 					}
 					if (!String.IsNullOrEmpty(savedItem["tr_explainLong"]))
