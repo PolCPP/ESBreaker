@@ -161,13 +161,13 @@ namespace NiceJson
 		//escaping logic
 
 		//Escaping/Unescaping logic
-		protected static string EscapeString(string input)
+		protected static string EscapeString(string Input)
 		{
 			StringBuilder result = new StringBuilder();
-			if (String.IsNullOrWhiteSpace(input))
+			if (Input == null)
 				return "";
 
-			foreach (char c in input)
+			foreach (char c in Input)
 			{
 				switch (c)
 				{
@@ -238,7 +238,7 @@ namespace NiceJson
 
 		protected static string UnescapeString(string Input)
 		{
-			if (String.IsNullOrWhiteSpace(Input))
+			if (Input == null)
 				return "";
 
 			StringBuilder result = new StringBuilder(Input.Length);
