@@ -1,5 +1,5 @@
-using NiceJson;
 using System;
+using NiceJson;
 
 namespace ESBreakerCLI
 {
@@ -18,8 +18,10 @@ namespace ESBreakerCLI
 					foreach (var param in information.Parameter)
 					{
 						JsonObjectCollection savedItem = default(JsonObjectCollection);
-						int Count = existingData != null ? existingData.Count : -1;
-						if (Count > 0)
+
+						if (existingData != null)
+						{
+							int Count = existingData.Count;
 							for (int idx = 0; idx < Count; idx++)
 							{
 								if (existingData[idx]["jp_text"] == param.Text
@@ -30,6 +32,7 @@ namespace ESBreakerCLI
 									break;
 								}
 							}
+						}
 
 						JsonObjectCollection item = new JsonObjectCollection();
 						item["eventNo"] = param.EventNo;
@@ -78,17 +81,21 @@ namespace ESBreakerCLI
 					{
 						var param = information.TitleList[idx];
 						JsonObjectCollection savedItem = default(JsonObjectCollection);
-						int Count = existingData != null ? existingData.Count : -1;
-						if (Count > 0)
+
+						if (existingData != null)
+						{
+							int Count = existingData.Count;
 							for (int idy = 0; idy < Count; idy++)
 							{
-								if (existingData[idy]["jp_title"] == param)
+								if (existingData[idy] != null &&
+								    existingData[idy]["jp_title"] == param)
 								{
 									savedItem = (JsonObjectCollection)existingData[idy];
 									existingData.RemoveAt(idy);
 									break;
 								}
 							}
+						}
 
 						JsonObjectCollection item = new JsonObjectCollection();
 						item["title_id"] = information.TitleID;

@@ -161,13 +161,13 @@ namespace NiceJson
 		//escaping logic
 
 		//Escaping/Unescaping logic
-		protected static string EscapeString(string input)
+		protected static string EscapeString(string Input)
 		{
 			StringBuilder result = new StringBuilder();
-			if (String.IsNullOrWhiteSpace(input))
+			if (Input == null)
 				return "";
 
-			foreach (char c in input)
+			foreach (char c in Input)
 			{
 				switch (c)
 				{
@@ -238,7 +238,7 @@ namespace NiceJson
 
 		protected static string UnescapeString(string Input)
 		{
-			if (String.IsNullOrWhiteSpace(Input))
+			if (Input == null)
 				return "";
 
 			StringBuilder result = new StringBuilder(Input.Length);
@@ -465,8 +465,7 @@ namespace NiceJson
 					break;
 				default://it must be a number or it will fail
 					{
-						long longValue = 0;
-						if (long.TryParse(jsonPart, NumberStyles.Any, CultureInfo.InvariantCulture, out longValue))
+						if (long.TryParse(jsonPart, NumberStyles.Any, CultureInfo.InvariantCulture, out long longValue))
 						{
 							if (longValue > int.MaxValue || longValue < int.MinValue)
 							{
@@ -479,8 +478,7 @@ namespace NiceJson
 						}
 						else
 						{
-							decimal decimalValue = 0;
-							if (decimal.TryParse(jsonPart, NumberStyles.Any, CultureInfo.InvariantCulture, out decimalValue))
+							if (decimal.TryParse(jsonPart, NumberStyles.Any, CultureInfo.InvariantCulture, out decimal decimalValue))
 							{
 								jsonPartValue = new JsonBasic(decimalValue);
 							}

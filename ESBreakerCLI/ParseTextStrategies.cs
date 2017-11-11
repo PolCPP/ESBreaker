@@ -25,17 +25,20 @@ namespace ESBreakerCLI
 					currentAssign = ((Contents.Text.Assign.TypeString)information.Assign).Param.Trim();
 				}
 
-				int Count = existingData != null ? existingData.Count : -1;
-				if (Count > 0)
+				if (existingData != null)
+				{
+					int Count = existingData.Count;
 					for (int idx = 0; idx < Count; idx++)
 					{
-						if (existingData[idx]["jp_text"] == information.Text)
+						if (existingData[idx] != null &&
+						    existingData[idx]["jp_text"] == information.Text)
 						{
 							savedItem = (JsonObjectCollection)existingData[idx];
 							existingData.RemoveAt(idx);
 							break;
 						}
 					}
+				}
 
 				item["assign"] = currentAssign;
 				item["jp_text"] = information.Text;
@@ -68,17 +71,21 @@ namespace ESBreakerCLI
 				JsonObjectCollection item = new JsonObjectCollection();
 
 				chipId = ((Contents.Text.Assign.TypeInt)information.Assign).Param.ToString(CultureInfo.InvariantCulture);
-				int Count = existingData != null ? existingData.Count : -1;
-				if (Count > 0)
+
+				if (existingData != null)
+				{
+					int Count = existingData.Count;
 					for (int idx = 0; idx < Count; idx++)
 					{
-						if (existingData[idx]["jp_name"] == information.Name)
+						if (existingData[idx] != null &&
+						    existingData[idx]["jp_name"] == information.Name)
 						{
 							savedItem = (JsonObjectCollection)existingData[idx];
 							existingData.RemoveAt(idx);
 							break;
 						}
 					}
+				}
 
 				item["chip"] = chipId;
 				item["jp_CV"] = information.CV;
@@ -126,17 +133,20 @@ namespace ESBreakerCLI
 					currentAssign = ((Contents.Text.Assign.TypeString)information.Assign).Param.Trim();
 				}
 
-				int Count = existingData != null ? existingData.Count : -1;
-				if (Count > 0)
+				if (existingData != null)
+				{
+					int Count = existingData.Count;
 					for (int idx = 0; idx < Count; idx++)
 					{
-						if (existingData[idx]["jp_explainShort"] == information.ExplainShort)
+						if (existingData[idx] != null &&
+						    existingData[idx]["jp_explainShort"] == information.ExplainShort)
 						{
 							savedItem = (JsonObjectCollection)existingData[idx];
 							existingData.RemoveAt(idx);
 							break;
 						}
 					}
+				}
 
 				item["assign"] = currentAssign;
 				item["jp_explainShort"] = information.ExplainShort;
@@ -207,17 +217,21 @@ namespace ESBreakerCLI
 							Console.Error.WriteLine("New assign format?");
 						}
 
-						int Count = existingData != null ? existingData.Count : -1;
-						if (Count > 0)
+						if (existingData != null)
+						{
+							int Count = existingData.Count;
 							for (int idx = 0; idx < Count; idx++)
 							{
-								if (existingData[idx]["jp_text"] == innerInformation.Name)
+								if (existingData[idx] != null &&
+								    existingData[idx]["jp_text"] == innerInformation.Name)
 								{
 									savedItem = (JsonObjectCollection)existingData[idx];
 									existingData.RemoveAt(idx);
 									break;
 								}
 							}
+						}
+
 						item["assign"] = currentAssign;
 						item["jp_text"] = innerInformation.Name;
 						item["tr_text"] = "";
@@ -282,17 +296,21 @@ namespace ESBreakerCLI
 							Console.Error.WriteLine("New assign format?");
 						}
 
-						int Count = existingData != null ? existingData.Count : -1;
-						if (Count > 0)
+						if (existingData != null)
+						{
+							int Count = existingData.Count;
 							for (int idx = 0; idx < Count; idx++)
 							{
-								if (existingData[idx]["jp_text"] == innerInformation.Name)
+								if (existingData[idx] != null &&
+								    existingData[idx]["jp_text"] == innerInformation.Name)
 								{
 									savedItem = (JsonObjectCollection)existingData[idx];
 									existingData.RemoveAt(idx);
 									break;
 								}
 							}
+						}
+
 						item["assign"] = currentAssign;
 						item["jp_text"] = innerInformation.Name;
 						item["tr_text"] = "";
@@ -356,16 +374,20 @@ namespace ESBreakerCLI
 							Console.Error.WriteLine("New assign format?");
 						}
 
-						int Count = existingData != null ? existingData.Count : -1;
-						if (Count > 0)
+						if (existingData != null)
+						{
+							int Count = existingData.Count;
 							for (int idx = 0; idx < Count; idx++)
 							{
-								if (existingData[idx]["text"] == innerInformation.Text)
+								if (existingData[idx] != null &&
+								    existingData[idx]["text"] == innerInformation.Text)
 								{
 									existingData.RemoveAt(idx);
 									break;
 								}
 							}
+						}
+
 						item["assign"] = currentAssign;
 						item["text"] = innerInformation.Text;
 						if (saveJson)
@@ -391,17 +413,22 @@ namespace ESBreakerCLI
 					foreach (Contents.Text.SeraphyRoom.Information innerInformation in seraphyFormat.Information)
 					{
 						JsonObjectCollection savedItem = default(JsonObjectCollection);
-						int Count = existingData != null ? existingData.Count : -1;
-						if (Count > 0)
+
+						if (existingData != null)
+						{
+							int Count = existingData.Count;
 							for (int idx = 0; idx < Count; idx++)
 							{
-								if (existingData[idx]["jp_text"] == innerInformation.Text)
+								if (existingData[idx] != null &&
+								    existingData[idx]["jp_text"] == innerInformation.Text)
 								{
 									savedItem = (JsonObjectCollection)existingData[idx];
 									existingData.RemoveAt(idx);
 									break;
 								}
 							}
+						}
+
 						JsonObjectCollection item = new JsonObjectCollection();
 						item["text_id"] = innerInformation.TextId;
 						item["jp_text"] = innerInformation.Text;
@@ -467,18 +494,21 @@ namespace ESBreakerCLI
 							Console.Error.WriteLine("New assign format?");
 						}
 
-						int Count = existingData != null ? existingData.Count : -1;
-						if (Count > 0)
+						if (existingData != null)
+						{
+							int Count = existingData.Count;
 							for (int idx = 0; idx < Count; idx++)
 							{
-								if (existingData[idx]["jp_text"] == innerInformation.Name)
+								if (existingData[idx] != null &&
+								    existingData[idx]["jp_text"] == innerInformation.Name)
 								{
 									savedItem = (JsonObjectCollection)existingData[idx];
 									existingData.RemoveAt(idx);
 									break;
 								}
-
 							}
+						}
+
 						item["assign"] = currentAssign;
 						item["jp_text"] = innerInformation.Name;
 						item["tr_text"] = "";
@@ -551,18 +581,21 @@ namespace ESBreakerCLI
 							Console.Error.WriteLine("New assign format?");
 						}
 
-						int Count = existingData != null ? existingData.Count : -1;
-						if (Count > 0)
+						if (existingData != null)
+						{
+							int Count = existingData.Count;
 							for (int idx = 0; idx < Count; idx++)
 							{
-								if (existingData[idx]["jp_text"] == innerInformation.Name)
+								if (existingData[idx] != null &&
+								    existingData[idx]["jp_text"] == innerInformation.Name)
 								{
 									savedItem = (JsonObjectCollection)existingData[idx];
 									existingData.RemoveAt(idx);
 									break;
 								}
-
 							}
+						}
+
 						item["assign"] = currentAssign;
 						item["jp_text"] = innerInformation.Name;
 						item["tr_text"] = "";
