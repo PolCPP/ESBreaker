@@ -149,6 +149,7 @@ namespace ESBreakerCLI
 			parseStrategies.Add(typeof(Contents.Text.UI.Format), ParseTextStrategies.UIText);
 			parseStrategies.Add(typeof(Contents.Text.Illustrator.Format), ParseTextStrategies.IllustratorText);
 			parseStrategies.Add(typeof(Contents.Text.ChipExplain.Format), ParseTextStrategies.ChipExplain);
+			parseStrategies.Add(typeof(Contents.Text.Leisure_PhotonDice_SpeakText.Format), ParseTextStrategies.PhotonDice);
 			parseStrategies.Add(typeof(Contents.Text.Name.Format), ParseTextStrategies.Name);
 			// Adding another single Text.Name file was too hard? That you decided to copypasta it into text charged?
 			parseStrategies.Add(typeof(Contents.Text.Charged.Format), ParseTextStrategies.Charged);

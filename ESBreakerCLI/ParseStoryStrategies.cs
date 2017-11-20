@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using NiceJson;
 
 namespace ESBreakerCLI
@@ -34,13 +35,22 @@ namespace ESBreakerCLI
 							}
 						}
 
-						JsonObjectCollection item = new JsonObjectCollection();
+                        var selectButtons = new JsonArrayCollection();
+                        var translatedButtons = new JsonArrayCollection();
+                        foreach (var button in param.SelectButton)
+                        {
+                            selectButtons.Add(button.Name);
+                            translatedButtons.Add("");
+                        }
+                        JsonObjectCollection item = new JsonObjectCollection();
 						item["eventNo"] = param.EventNo;
 						item["jp_name"] = param.Name;
 						item["tr_name"] = "";
 						item["jp_text"] = param.Text;
-						item["tr_text"] = "";
-						item["fileID"] = information.FileID;
+                        item["tr_text"] = "";
+                        item["jp_buttons"] = selectButtons;
+                        item["tr_buttons"] = translatedButtons;
+                        item["fileID"] = information.FileID;
 						if (savedItem != default(JsonObjectCollection))
 						{
 							if (!String.IsNullOrEmpty(savedItem["tr_name"]))
@@ -53,8 +63,21 @@ namespace ESBreakerCLI
 								param.Text = savedItem["tr_text"];
 								item["tr_text"] = savedItem["tr_text"];
 							}
-						}
-						i++;
+                            if (savedItem.ContainsKey("tr_buttons"))
+                            {
+                                var idx = 0;
+                                foreach (var button in (JsonArrayCollection)savedItem["tr_buttons"] )
+                                {
+                                    if (!String.IsNullOrEmpty(button) && param.SelectButton.Length > idx)
+                                    {
+                                            param.SelectButton[idx].Name = button;
+                                    }
+                                    idx++;
+                                }
+                                item["tr_buttons"] = savedItem["tr_buttons"];
+                            }
+                        }
+                        i++;
 						if (saveJson)
 						{
 							data.Add(item);
