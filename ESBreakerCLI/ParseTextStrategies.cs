@@ -495,6 +495,7 @@ namespace ESBreakerCLI
 					foreach (Contents.Text.SeraphyRoom.Information innerInformation in seraphyFormat.Information)
 					{
 						JsonObjectCollection savedItem = default(JsonObjectCollection);
+						JsonObjectCollection item = new JsonObjectCollection();
 
 						if (existingData != null)
 						{
@@ -511,9 +512,6 @@ namespace ESBreakerCLI
 							}
 						}
 
-						JsonObjectCollection item = new JsonObjectCollection();
-						item["text_id"] = innerInformation.TextId;
-						item["jp_text"] = innerInformation.Text;
 						item["tr_text"] = "";
 						if (savedItem != default(JsonObjectCollection))
 						{
@@ -523,6 +521,9 @@ namespace ESBreakerCLI
 								item["tr_text"] = savedItem["tr_text"];
 							}
 						}
+
+						item["text_id"] = innerInformation.TextId;
+						item["jp_text"] = innerInformation.Text;
 						if (saveJson)
 						{
 							data.Add(item);

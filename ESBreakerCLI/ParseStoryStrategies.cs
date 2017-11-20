@@ -18,6 +18,7 @@ namespace ESBreakerCLI
 					foreach (var param in information.Parameter)
 					{
 						JsonObjectCollection savedItem = default(JsonObjectCollection);
+						JsonObjectCollection item = new JsonObjectCollection();
 
 						if (existingData != null)
 						{
@@ -41,7 +42,7 @@ namespace ESBreakerCLI
 							selectButtons.Add(button.Name);
 							translatedButtons.Add("");
 						}
-						JsonObjectCollection item = new JsonObjectCollection();
+
 						item["eventNo"] = param.EventNo;
 						item["jp_name"] = param.Name;
 						item["tr_name"] = "";
@@ -100,8 +101,9 @@ namespace ESBreakerCLI
 					int i = 0;
 					for (int idx = 0; idx < information.TitleList.Length; idx++)
 					{
-						var param = information.TitleList[idx];
 						JsonObjectCollection savedItem = default(JsonObjectCollection);
+						var param = information.TitleList[idx];
+						JsonObjectCollection item = new JsonObjectCollection();
 
 						if (existingData != null)
 						{
@@ -118,7 +120,6 @@ namespace ESBreakerCLI
 							}
 						}
 
-						JsonObjectCollection item = new JsonObjectCollection();
 						item["title_id"] = information.TitleID;
 						item["jp_title"] = param;
 						item["tr_title"] = "";
