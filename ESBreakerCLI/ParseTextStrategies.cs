@@ -43,6 +43,7 @@ namespace ESBreakerCLI
 				item["assign"] = currentAssign;
 				item["jp_text"] = information.Text;
 				item["tr_text"] = "";
+
 				if (savedItem != default(JsonObjectCollection))
 				{
 					if (!String.IsNullOrEmpty(savedItem["tr_text"]))
@@ -174,6 +175,7 @@ namespace ESBreakerCLI
 				item["tr_CV"] = "";
 				item["jp_name"] = information.Name;
 				item["tr_name"] = "";
+
 				if (savedItem != default(JsonObjectCollection))
 				{
 					if (!String.IsNullOrEmpty(savedItem["tr_name"]))
@@ -235,6 +237,7 @@ namespace ESBreakerCLI
 				item["tr_explainShort"] = "";
 				item["jp_explainLong"] = information.ExplainLong;
 				item["tr_explainLong"] = "";
+
 				if (savedItem != default(JsonObjectCollection))
 				{
 					if (!String.IsNullOrEmpty(savedItem["tr_explainShort"]))
@@ -317,6 +320,7 @@ namespace ESBreakerCLI
 						item["assign"] = currentAssign;
 						item["jp_text"] = innerInformation.Name;
 						item["tr_text"] = "";
+
 						if (savedItem != default(JsonObjectCollection))
 						{
 							if (!String.IsNullOrEmpty(savedItem["tr_text"]))
@@ -396,6 +400,7 @@ namespace ESBreakerCLI
 						item["assign"] = currentAssign;
 						item["jp_text"] = innerInformation.Name;
 						item["tr_text"] = "";
+
 						if (savedItem != default(JsonObjectCollection))
 						{
 							if (!String.IsNullOrEmpty(savedItem["tr_text"]))
@@ -472,6 +477,7 @@ namespace ESBreakerCLI
 
 						item["assign"] = currentAssign;
 						item["text"] = innerInformation.Text;
+
 						if (saveJson)
 						{
 							data.Add(item);
@@ -512,7 +518,11 @@ namespace ESBreakerCLI
 							}
 						}
 
+
+						item["text_id"] = innerInformation.TextId;
+						item["jp_text"] = innerInformation.Text;
 						item["tr_text"] = "";
+
 						if (savedItem != default(JsonObjectCollection))
 						{
 							if (!String.IsNullOrEmpty(savedItem["tr_text"]))
@@ -522,8 +532,6 @@ namespace ESBreakerCLI
 							}
 						}
 
-						item["text_id"] = innerInformation.TextId;
-						item["jp_text"] = innerInformation.Text;
 						if (saveJson)
 						{
 							data.Add(item);
@@ -597,6 +605,7 @@ namespace ESBreakerCLI
 						item["tr_text"] = "";
 						item["jp_explain"] = innerInformation.Explain;
 						item["tr_explain"] = "";
+
 						if (savedItem != default(JsonObjectCollection))
 						{
 							if (!String.IsNullOrEmpty(savedItem["tr_text"]))
@@ -684,6 +693,7 @@ namespace ESBreakerCLI
 						item["tr_text"] = "";
 						item["jp_explain"] = innerInformation.Explain;
 						item["tr_explain"] = "";
+
 						if (savedItem != default(JsonObjectCollection))
 						{
 							if (!String.IsNullOrEmpty(savedItem["tr_text"]))
