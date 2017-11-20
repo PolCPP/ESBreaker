@@ -15,18 +15,18 @@ namespace ESBreakerCLI
 			{
 				foreach (Contents.Story.Text.Information information in storyEventFormat.Information)
 				{
-					int i = 0;
 					foreach (var param in information.Parameter)
 					{
 						JsonObjectCollection savedItem = default(JsonObjectCollection);
+						JsonObjectCollection item = new JsonObjectCollection();
 
 						if (existingData != null)
 						{
 							int Count = existingData.Count;
 							for (int idx = 0; idx < Count; idx++)
 							{
-								if (existingData[idx]["jp_text"] == param.Text
-								    && existingData[idx]["jp_name"] == param.Name)
+								if (existingData[idx]["jp_text"] == param.Text &&
+								    existingData[idx]["jp_name"] == param.Name)
 								{
 									savedItem = (JsonObjectCollection)existingData[idx];
 									existingData.RemoveAt(idx);
@@ -35,22 +35,28 @@ namespace ESBreakerCLI
 							}
 						}
 
-                        var selectButtons = new JsonArrayCollection();
-                        var translatedButtons = new JsonArrayCollection();
-                        foreach (var button in param.SelectButton)
-                        {
-                            selectButtons.Add(button.Name);
-                            translatedButtons.Add("");
-                        }
-                        JsonObjectCollection item = new JsonObjectCollection();
+						var selectButtons = new JsonArrayCollection();
+						var translatedButtons = new JsonArrayCollection();
+						bool EmptyButton = true;
+						foreach (var button in param.SelectButton)
+						{
+							selectButtons.Add(button.Name);
+							translatedButtons.Add("");
+							if (!String.IsNullOrEmpty(button.Name))
+								EmptyButton = false;
+						}
+
 						item["eventNo"] = param.EventNo;
 						item["jp_name"] = param.Name;
 						item["tr_name"] = "";
 						item["jp_text"] = param.Text;
-                        item["tr_text"] = "";
-                        item["jp_buttons"] = selectButtons;
-                        item["tr_buttons"] = translatedButtons;
-                        item["fileID"] = information.FileID;
+						item["tr_text"] = "";
+						if (!EmptyButton)
+						{
+							item["jp_buttons"] = selectButtons;
+							item["tr_buttons"] = translatedButtons;
+						}
+						item["fileID"] = information.FileID;
 						if (savedItem != default(JsonObjectCollection))
 						{
 							if (!String.IsNullOrEmpty(savedItem["tr_name"]))
@@ -63,21 +69,20 @@ namespace ESBreakerCLI
 								param.Text = savedItem["tr_text"];
 								item["tr_text"] = savedItem["tr_text"];
 							}
-                            if (savedItem.ContainsKey("tr_buttons"))
-                            {
-                                var idx = 0;
-                                foreach (var button in (JsonArrayCollection)savedItem["tr_buttons"] )
-                                {
-                                    if (!String.IsNullOrEmpty(button) && param.SelectButton.Length > idx)
-                                    {
-                                            param.SelectButton[idx].Name = button;
-                                    }
-                                    idx++;
-                                }
-                                item["tr_buttons"] = savedItem["tr_buttons"];
-                            }
-                        }
-                        i++;
+							if (savedItem.ContainsKey("tr_buttons"))
+							{
+								var idx = 0;
+								foreach (var button in (JsonArrayCollection)savedItem["tr_buttons"])
+								{
+									if (!String.IsNullOrEmpty(button) && param.SelectButton.Length > idx)
+									{
+										param.SelectButton[idx].Name = button;
+									}
+									idx++;
+								}
+								item["tr_buttons"] = savedItem["tr_buttons"];
+							}
+						}
 						if (saveJson)
 						{
 							data.Add(item);
@@ -102,8 +107,9 @@ namespace ESBreakerCLI
 					int i = 0;
 					for (int idx = 0; idx < information.TitleList.Length; idx++)
 					{
-						var param = information.TitleList[idx];
 						JsonObjectCollection savedItem = default(JsonObjectCollection);
+						var param = information.TitleList[idx];
+						JsonObjectCollection item = new JsonObjectCollection();
 
 						if (existingData != null)
 						{
@@ -120,7 +126,6 @@ namespace ESBreakerCLI
 							}
 						}
 
-						JsonObjectCollection item = new JsonObjectCollection();
 						item["title_id"] = information.TitleID;
 						item["jp_title"] = param;
 						item["tr_title"] = "";

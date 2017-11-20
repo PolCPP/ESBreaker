@@ -10,8 +10,8 @@ namespace ESBreakerCLI
 {
 	public static class JsonFiler
 	{
-		private static string path = Path.Combine(System.IO.Path.GetDirectoryName(
-		                                          Assembly.GetEntryAssembly().Location), "json");
+		private static string cwd = System.IO.Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
+		private static string path = Path.Combine(cwd, "json");
 
 		private static string extension = ".txt";
 
@@ -38,12 +38,12 @@ namespace ESBreakerCLI
 				}
 				catch (PathTooLongException ex)
 				{
-					Console.Error.WriteLine("Filename too long: "+ filePath);
+					Console.Error.WriteLine("Filename too long: " + filePath);
 					Console.Error.WriteLine(ex.ToString());
 				}
 				catch (DirectoryNotFoundException ex)
 				{
-					Console.Error.WriteLine("Could not find directory: "+ filePath);
+					Console.Error.WriteLine("Could not find directory: " + filePath);
 					Console.Error.WriteLine(ex.ToString());
 				}
 				catch (FileNotFoundException ex)
@@ -53,22 +53,22 @@ namespace ESBreakerCLI
 				}
 				catch (IOException ex)
 				{
-					Console.Error.WriteLine("I/O Error while reading: "+ filePath);
+					Console.Error.WriteLine("I/O Error while reading: " + filePath);
 					Console.Error.WriteLine(ex.ToString());
 				}
 				catch (UnauthorizedAccessException ex)
 				{
-					Console.Error.WriteLine("The reading operation is not supported: "+ filePath);
+					Console.Error.WriteLine("The reading operation is not supported: " + filePath);
 					Console.Error.WriteLine(ex.ToString());
 				}
 				catch (NotSupportedException ex)
 				{
-					Console.Error.WriteLine("Filepath is invalid: "+ filePath);
+					Console.Error.WriteLine("Filepath is invalid: " + filePath);
 					Console.Error.WriteLine(ex.ToString());
 				}
 				catch (SecurityException ex)
 				{
-					Console.Error.WriteLine("Blocked from reading: "+ filePath);
+					Console.Error.WriteLine("Blocked from reading: " + filePath);
 					Console.Error.WriteLine(ex.ToString());
 				}
 				catch (Exception ex)
