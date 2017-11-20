@@ -37,10 +37,13 @@ namespace ESBreakerCLI
 
 						var selectButtons = new JsonArrayCollection();
 						var translatedButtons = new JsonArrayCollection();
+						bool EmptyButton = true;
 						foreach (var button in param.SelectButton)
 						{
 							selectButtons.Add(button.Name);
 							translatedButtons.Add("");
+							if (!String.IsNullOrEmpty(button.Name))
+								EmptyButton = false;
 						}
 
 						item["eventNo"] = param.EventNo;
@@ -48,8 +51,11 @@ namespace ESBreakerCLI
 						item["tr_name"] = "";
 						item["jp_text"] = param.Text;
 						item["tr_text"] = "";
-						item["jp_buttons"] = selectButtons;
-						item["tr_buttons"] = translatedButtons;
+						if (!EmptyButton)
+						{
+							item["jp_buttons"] = selectButtons;
+							item["tr_buttons"] = translatedButtons;
+						}
 						item["fileID"] = information.FileID;
 						if (savedItem != default(JsonObjectCollection))
 						{
