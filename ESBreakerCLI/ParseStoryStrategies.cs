@@ -15,7 +15,6 @@ namespace ESBreakerCLI
 			{
 				foreach (Contents.Story.Text.Information information in storyEventFormat.Information)
 				{
-					int i = 0;
 					foreach (var param in information.Parameter)
 					{
 						JsonObjectCollection savedItem = default(JsonObjectCollection);
@@ -77,7 +76,6 @@ namespace ESBreakerCLI
                                 item["tr_buttons"] = savedItem["tr_buttons"];
                             }
                         }
-                        i++;
 						if (saveJson)
 						{
 							data.Add(item);
