@@ -9,8 +9,8 @@ namespace ESBreakerCLI
 	class Options
 	{
 		[Option('j', "skip-json", DefaultValue = false, Required = false,
-		        HelpText = "Don't Generate/Update JSON. This way it only generates, " +
-					        "or update the files with new patch data")]
+				HelpText = "Don't Generate/Update JSON. This way it only generates, " +
+				           "or update the files with new patch data")]
 		public bool SkipJson { get; set; }
 
 		[Option('m', "minify-json", DefaultValue = false, Required = false,

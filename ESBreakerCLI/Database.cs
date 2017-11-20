@@ -139,7 +139,7 @@ namespace ESBreakerCLI
 				{
 					Console.WriteLine(String.Format(CultureInfo.InvariantCulture, "Processing {0}", storyType.ToString()));
 					var output = parse(format, JsonFiler.GetExisting(storyType.ToString()), saveJson);
-					JsonFiler.Store(storyType.ToString(), output,prettyPrint);
+					JsonFiler.Store(storyType.ToString(), output, prettyPrint);
 				}
 			}
 		}

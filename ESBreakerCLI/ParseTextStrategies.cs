@@ -60,88 +60,88 @@ namespace ESBreakerCLI
 		}
 
 
-        public static JsonArrayCollection PhotonDice(object source, JsonArrayCollection existingData, bool saveJson)
-        {
-            JsonArrayCollection data = new JsonArrayCollection();
-            Contents.Text.Leisure_PhotonDice_SpeakText.Format diceFormat = (Contents.Text.Leisure_PhotonDice_SpeakText.Format)source;
-            string currentAssign;
-            
-            foreach (Contents.Text.Leisure_PhotonDice_SpeakText.Information information in diceFormat.Information)
-            {
-                JsonObjectCollection savedItem = default(JsonObjectCollection);
-                JsonObjectCollection item = new JsonObjectCollection();
-                if (information.Assign.GetType() == typeof(Contents.Text.Assign.TypeInt))
-                {
-                    currentAssign = ((Contents.Text.Assign.TypeInt)information.Assign).Param.ToString(CultureInfo.InvariantCulture);
-                }
-                else if (information.Assign.GetType() == typeof(Contents.Text.Assign.Type2Int))
-                {
-                    Contents.Text.Assign.Type2Int assign = (Contents.Text.Assign.Type2Int)information.Assign;
-                    currentAssign = "";
-                    for (int i = 0; i < assign.Param.Length; i++)
-                        currentAssign += assign.Param[i].ToString(CultureInfo.InvariantCulture);
-                }
-                else
-                {
-                    currentAssign = ((Contents.Text.Assign.TypeString)information.Assign).Param.Trim();
-                }
+		public static JsonArrayCollection PhotonDice(object source, JsonArrayCollection existingData, bool saveJson)
+		{
+			JsonArrayCollection data = new JsonArrayCollection();
+			Contents.Text.Leisure_PhotonDice_SpeakText.Format diceFormat = (Contents.Text.Leisure_PhotonDice_SpeakText.Format)source;
+			string currentAssign;
+
+			foreach (Contents.Text.Leisure_PhotonDice_SpeakText.Information information in diceFormat.Information)
+			{
+				JsonObjectCollection savedItem = default(JsonObjectCollection);
+				JsonObjectCollection item = new JsonObjectCollection();
+				if (information.Assign.GetType() == typeof(Contents.Text.Assign.TypeInt))
+				{
+					currentAssign = ((Contents.Text.Assign.TypeInt)information.Assign).Param.ToString(CultureInfo.InvariantCulture);
+				}
+				else if (information.Assign.GetType() == typeof(Contents.Text.Assign.Type2Int))
+				{
+					Contents.Text.Assign.Type2Int assign = (Contents.Text.Assign.Type2Int)information.Assign;
+					currentAssign = "";
+					for (int i = 0; i < assign.Param.Length; i++)
+						currentAssign += assign.Param[i].ToString(CultureInfo.InvariantCulture);
+				}
+				else
+				{
+					currentAssign = ((Contents.Text.Assign.TypeString)information.Assign).Param.Trim();
+				}
 
 
-                if (existingData != null)
-                {
-                    int Count = existingData.Count;
-                    for (int idx = 0; idx < Count; idx++)
-                    {
-                        if (existingData[idx] != null &&
-                            existingData[idx]["assign"] == currentAssign)
-                        {
-                            savedItem = (JsonObjectCollection)existingData[idx];
-                            existingData.RemoveAt(idx);
-                            break;
-                        }
-                    }
-                }
+				if (existingData != null)
+				{
+					int Count = existingData.Count;
+					for (int idx = 0; idx < Count; idx++)
+					{
+						if (existingData[idx] != null &&
+						    existingData[idx]["assign"] == currentAssign)
+						{
+							savedItem = (JsonObjectCollection)existingData[idx];
+							existingData.RemoveAt(idx);
+							break;
+						}
+					}
+				}
 
-                var patterns = new JsonArrayCollection();
-                var translatedPatterns = new JsonArrayCollection();
+				var patterns = new JsonArrayCollection();
+				var translatedPatterns = new JsonArrayCollection();
 
-                foreach (var pattern in information.Pattern)
-                {
-                    patterns.Add(pattern);
-                    translatedPatterns.Add("");
-                }
+				foreach (var pattern in information.Pattern)
+				{
+					patterns.Add(pattern);
+					translatedPatterns.Add("");
+				}
 
-                item["assign"] = currentAssign;
-                item["jp_patterns"] = patterns;
-                item["tr_patterns"] = translatedPatterns;
-
-
-                if (savedItem != default(JsonObjectCollection))
-                {
-                    if (savedItem.ContainsKey("tr_patterns"))
-                    {
-                        var idx = 0;
-                        foreach (var pattern in (JsonArrayCollection)savedItem["tr_patterns"])
-                        {
-                            if (!String.IsNullOrEmpty(pattern) && information.Pattern.Length > idx)
-                            {
-                                information.Pattern[idx]= pattern;
-                            }
-                            idx++;
-                        }
-                        item["tr_patterns"] = savedItem["tr_patterns"];
-                    }
-                }
-                if (saveJson)
-                {
-                    data.Add(item);
-                }
-            }
-            return data;
-        }
+				item["assign"] = currentAssign;
+				item["jp_patterns"] = patterns;
+				item["tr_patterns"] = translatedPatterns;
 
 
-        public static JsonArrayCollection IllustratorText(object source, JsonArrayCollection existingData, bool saveJson)
+				if (savedItem != default(JsonObjectCollection))
+				{
+					if (savedItem.ContainsKey("tr_patterns"))
+					{
+						var idx = 0;
+						foreach (var pattern in (JsonArrayCollection)savedItem["tr_patterns"])
+						{
+							if (!String.IsNullOrEmpty(pattern) && information.Pattern.Length > idx)
+							{
+								information.Pattern[idx] = pattern;
+							}
+							idx++;
+						}
+						item["tr_patterns"] = savedItem["tr_patterns"];
+					}
+				}
+				if (saveJson)
+				{
+					data.Add(item);
+				}
+			}
+			return data;
+		}
+
+
+		public static JsonArrayCollection IllustratorText(object source, JsonArrayCollection existingData, bool saveJson)
 		{
 			JsonArrayCollection data = new JsonArrayCollection();
 			Contents.Text.Illustrator.Format textUIFormat = (Contents.Text.Illustrator.Format)source;
