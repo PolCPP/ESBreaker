@@ -601,7 +601,7 @@ namespace ESBreakerCLI
 						}
 
 						item["assign"] = currentAssign;
-						item["jp_text"] = innerInformation.Name;
+						item["jp_text"] = innerInformation.Name.TrimEnd();
 						item["tr_text"] = "";
 						item["jp_explain"] = innerInformation.Explain;
 						item["tr_explain"] = "";
