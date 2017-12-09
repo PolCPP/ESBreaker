@@ -2,6 +2,7 @@ param(
 [string]$ProjectDir = "ESBreakerCLI\"
 )
 
+$ErrorActionPreference = "Stop"
 
 $shell = New-Object -Com Shell.Application
 $FOF_MULTIDESTFILES = 0x1
@@ -22,20 +23,10 @@ $FOF_WANTNUKEWARNING = 0x4000
 $FOF_NORECURSEREPARSE = 0x8000
 $FOF_NO_UI = $FOF_SILENT + $FOF_NOCONFIRMATION + $FOF_NOERRORUI + $FOF_NOCONFIRMMKDIR
 
+$UA = "APK Ripper (Windows)"
 
 function ExtractZip($fldr, $dst)
 {
-	if ($fldr -eq $Null)
-	{
-		Write-Host "NULL Source Folder"
-		Return
-	}
-	if ($dst -eq $Null)
-	{
-		Write-Host "NULL Dest Folder"
-		Return
-	}
-
 	foreach($item in $fldr.items())
 	{
 		If ($item.GetFolder -ne $Null)
@@ -51,7 +42,7 @@ function ExtractZip($fldr, $dst)
 	}
 }
 
-$APKFilename = Invoke-WebRequest -Uri "http://pso2es.10nub.es/game.php?filename=true" -DisableKeepAlive -TimeoutSec 30 -UserAgent "APK Ripper (Windows)"
+$APKFilename = Invoke-WebRequest -Uri "http://pso2es.10nub.es/game.php?filename=true" -DisableKeepAlive -TimeoutSec 30 -UserAgent $UA
 
 Write-Output "Downloading $APKFileName from pso2es.10.nub.es to $ProjectDir"
 [Console]::Out.Flush()
@@ -69,8 +60,10 @@ else
 {
 	Write-Output "Donwloading APK. this WILL take a while, Saving APK as $PathtoAPK"
 	[Console]::Out.Flush()
-	Invoke-WebRequest -Uri "http://pso2es.10nub.es/game.php" -DisableKeepAlive -TimeoutSec 30 -UserAgent "APK Ripper" -OutFile $PathtoAPK
+	Invoke-WebRequest -Uri "http://pso2es.10nub.es/game.php" -DisableKeepAlive -TimeoutSec 30 -UserAgent $UA -OutFile $PathtoAPK
 }
+
+Write-Output "TODO: Delete old APKs"
 
 if (Test-Path -Path $PathtoZIP)
 {

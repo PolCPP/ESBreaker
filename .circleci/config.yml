@@ -1,0 +1,49 @@
+version: 2
+jobs:
+  build:
+    working_directory: /root/source
+    docker:
+      - image: mono:latest
+    steps:
+      - run:
+          name: Update APT listing
+          command: apt-get -qq update
+      - run:
+          name: Install git, distributed version control system
+          command: apt-get -qq -y install git
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-packages-{{ checksum "ESBreakerCLIpackages.config" }}
+            # Find the most recent cache used from any branch
+            - v1-packages-
+      - run:
+          name: Restore .NET packages
+          command: nuget restore -NonInteractive -Verbosity quiet
+      - save_cache:
+          keys: v1-packages-{{ checksum "ESBreakerCL/packages.config" }}
+          paths:
+            - packages
+      - restore_cache:
+          keys:
+            # Find the most recent cache used from any branch
+            - v1-APK-
+      - run:
+          command: ESBreakCI/prebuidl.sh ESBReakCI/
+      - save_cache:
+          keys: v1-APK-{{ epoch }}
+          paths:
+            - ESBreakerCI/lib/*.apk
+      - run:
+          name: Build Release
+          command: msbuild /p:BuildWithMono="true" /p:Configuration=Release
+      - run:
+          name: Debug Release
+          command: msbuild /p:BuildWithMono="true" /p:Configuration=Debug
+      - store_artifacts:
+          path: /root/build/Release
+          destination: Release
+      - store_artifacts:
+          path: /root/build/Debug
+          destination: Debug
+

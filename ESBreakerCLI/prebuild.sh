@@ -1,21 +1,23 @@
-#!/bin/bash
-DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-echo Script is from $DIR
+#!/bin/bash -e
 if [ -z "$1" ]
  then
-    $ProjectDir = $DIR
-esle
-	$ProjectDir = $(dirname "$1")
-	echo "Running for $ProjectDir
+	ProjectDir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+ else
+	ProjectDir="$( cd "$( dirname "$1/." )" && pwd )"
 fi
 
-$APKFilename = "$(wget "http://pso2es.10nub.es/game.php?filename=true" --no-http-keep-alive --dns-timeout=15 -read-timeout=30 -UserAgent "APK Ripper (*NIX)" --quiet -O -)"
+UA="APK Ripper \(*NIX\)"
 
-$Pathtolib = "$ProjectDir/lib"
-$PathtoAPK = "$Pathtolib/$APKFilename"
+APKFilename=$(wget "http://pso2es.10nub.es/game.php?filename=true" --no-http-keep-alive --dns-timeout=15 --read-timeout=30 --user-agent "$UA" --quiet -O -)
 
-echo "Downloading $APKFileName from pso2es.10.nub.es to $ProjectDir"
+Pathtolib="$ProjectDir/lib"
+PathtoAPK="$Pathtolib/$APKFilename"
+
+echo "Downloading $APKFilename from pso2es.10.nub.es to $ProjectDir"
 
 cd $Pathtolib
-wget "http://pso2es.10nub.es/game.php" --no-http-keep-alive --dns-timeout=15 -read-timeout=30 -UserAgent "APK Ripper (*NIX)" --continue
-unzip -xfj "$PathtoAPK" "assets/bin/Data/Managed/*.dll"
+wget "http://pso2es.10nub.es/game.php" --no-http-keep-alive --dns-timeout=15 --read-timeout=30 --user-agent "$UA" --quiet --continue --trust-server-names
+echo "Deleting old APK files"
+find . -name "*.apk" -not -name "$APKFilename" -delete
+echo "Extracting DLLs from APK"
+unzip -xfjoq "$PathtoAPK" "assets/bin/Data/Managed/*.dll"

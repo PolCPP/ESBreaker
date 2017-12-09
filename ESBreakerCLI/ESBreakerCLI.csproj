@@ -96,7 +96,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PreBuildEvent Condition=" '$(OS)' == 'Unix' ">/bin/sh "$(ProjectDir)prebuild.sh" "$(ProjectDir)"</PreBuildEvent>
+    <PreBuildEvent Condition=" '$(OS)' == 'Unix' ">/bin/bash "$(ProjectDir)prebuild.sh" "$(ProjectDir)"</PreBuildEvent>
     <PreBuildEvent Condition=" '$(OS)' != 'Unix' ">Powershell.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -File "$(ProjectDir)prebuild.ps1" "$(ProjectDir)</PreBuildEvent>
   </PropertyGroup>
 </Project>

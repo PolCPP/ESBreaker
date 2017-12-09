@@ -1,0 +1,30 @@
+image: Visual Studio 2017
+
+environment:
+  EnableNuGetPackageRestore: true
+  APPVEYOR_SAVE_CACHE_ON_ERROR: true
+
+cache:
+- packages -> **\ESBreakerCLI\packages.config
+- ESBreakerCI\lib\
+
+configuration:
+- Release
+- Debug
+
+build:
+  parallel: true
+  verbosity: minimal
+
+before_build:
+- cmd: nuget restore -NonInteractive -Verbosity quiet
+
+after_build:
+- cmd: git rev-parse --short %APPVEYOR_REPO_COMMIT%>%TMP%\gitshort.txt
+- cmd: set /P GITSHORT=<%TMP%\gitshort.txt
+- set BUILD_ARCHIVE=%APPVEYOR_REPO_BRANCH%-%GITSHORT%-%PLATFORM%-%CONFIGURATION%.7z
+- cmd: cd "ESBreakerCLI\bin\"
+- cmd: cd "%CONFIGURATION%"
+- cmd: 7z a %BUILD_ARCHIVE% *.* -xr!.gitignore
+- appveyor PushArtifact %BUILD_ARCHIVE%
+- cmd: cd ..\..\..
