@@ -25,6 +25,7 @@ after_build:
 - set BUILD_ARCHIVE=%APPVEYOR_REPO_BRANCH%-%GITSHORT%-%PLATFORM%-%CONFIGURATION%.7z
 - cmd: cd "ESBreakerCLI\bin\"
 - cmd: cd "%CONFIGURATION%"
+- cmd: del /F /Q ContentsSerializer.dll Assembly-CSharp-firstpass.dll UnityEngine.dll protobuf-net.dll ProtoBuffSerializer.dll
 - cmd: 7z a %BUILD_ARCHIVE% *.* -xr!.gitignore
 - appveyor PushArtifact %BUILD_ARCHIVE%
 - cmd: cd ..\..\..
