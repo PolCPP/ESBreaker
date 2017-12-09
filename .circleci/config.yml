@@ -9,8 +9,8 @@ jobs:
           name: Update APT listing
           command: apt-get -qq update
       - run:
-          name: Install git and wget
-          command: apt-get -qq -y --no-install-recommends install git wget
+          name: Install git, wget and unzip
+          command: apt-get -qq -y --no-install-recommends install git wget unzip
       - checkout
       - restore_cache:
           keys:
