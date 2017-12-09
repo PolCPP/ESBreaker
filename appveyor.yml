@@ -6,7 +6,7 @@ environment:
 
 cache:
 - packages -> **\ESBreakerCLI\packages.config
-- ESBreakerCI\lib\
+- \ESBreakerCLI\lib\*.apk
 
 configuration:
 - Release
