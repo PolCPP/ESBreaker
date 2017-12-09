@@ -20,4 +20,4 @@ wget "http://pso2es.10nub.es/game.php" --no-http-keep-alive --dns-timeout=15 --r
 echo "Deleting old APK files"
 find . -name "*.apk" -not -name "$APKFilename" -delete
 echo "Extracting DLLs from APK"
-unzip -xfjoq "$PathtoAPK" "assets/bin/Data/Managed/*.dll"
+unzip -xujoq "$PathtoAPK" "assets/bin/Data/Managed/*.dll"
