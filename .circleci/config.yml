@@ -21,7 +21,7 @@ jobs:
           name: Restore .NET packages
           command: nuget restore -NonInteractive -Verbosity quiet
       - save_cache:
-          key: v1-packages-{{ checksum "ESBreakerCL/packages.config" }}
+          key: v1-packages-{{ checksum "ESBreakerCLI/packages.config" }}
           paths:
             - packages
       - restore_cache:
@@ -29,7 +29,7 @@ jobs:
             # Find the most recent cache used from any branch
             - v1-APK-
       - run:
-          command: ESBreakCLI/prebuild.sh ESBReakCLI/
+          command: ./ESBreakerCLI/prebuild.sh ESBreakerCLI/
       - save_cache:
           key: v1-APK-{{ epoch }}
           paths:
