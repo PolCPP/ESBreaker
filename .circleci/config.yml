@@ -14,7 +14,7 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - v1-packages-{{ checksum "ESBreakerCLIpackages.config" }}
+            - v1-packages-{{ checksum "ESBreakerCLI/packages.config" }}
             # Find the most recent cache used from any branch
             - v1-packages-
       - run:
@@ -29,7 +29,7 @@ jobs:
             # Find the most recent cache used from any branch
             - v1-APK-
       - run:
-          command: ESBreakCI/prebuidl.sh ESBReakCI/
+          command: ESBreakCLI/prebuild.sh ESBReakCLI/
       - save_cache:
           key: v1-APK-{{ epoch }}
           paths:
