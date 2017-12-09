@@ -40,6 +40,9 @@ jobs:
       - run:
           name: Debug Release
           command: msbuild /p:BuildWithMono="true" /p:Configuration=Debug
+      - run:
+          name: Delete External DLLs
+          command: find ESBreakerCLI/bin -name "ContentsSerializer.dll" -or -name "Assembly-CSharp-firstpass.dll" -or -name "UnityEngine.dll" -or -name "protobuf-net.dll" -or -name "ProtoBuffSerializer.dll" -delete
       - store_artifacts:
           path: /root/build/Release
           destination: Release
