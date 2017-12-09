@@ -489,6 +489,7 @@ namespace ESBreakerCLI
 		}
 
 
+		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Seraphy")]
 		public static JsonArrayCollection SeraphyRoom(object source, JsonArrayCollection existingData, bool saveJson)
 		{
 			JsonArrayCollection data = new JsonArrayCollection();

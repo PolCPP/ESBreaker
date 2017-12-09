@@ -65,6 +65,7 @@ namespace ESBreakerCLI
 			SaveStory();
 		}
 
+		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "System.Console.WriteLine(System.String)")]
 		void SaveText()
 		{
 			Console.WriteLine("Generating text patch");
@@ -90,6 +91,7 @@ namespace ESBreakerCLI
 			fm.Save(format);
 		}
 
+		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "System.Console.WriteLine(System.String)")]
 		void SaveStory()
 		{
 			Console.WriteLine("Generating story patch");
@@ -115,6 +117,7 @@ namespace ESBreakerCLI
 			fm.Save(format);
 		}
 
+		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "System.Console.WriteLine(System.String)")]
 		void Parse()
 		{
 			var textTypes = Enum.GetValues(typeof(Contents.TextID));

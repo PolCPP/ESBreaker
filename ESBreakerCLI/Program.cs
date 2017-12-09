@@ -8,19 +8,34 @@ namespace ESBreakerCLI
 {
 	class Options
 	{
-		[Option('j', "skip-json", DefaultValue = false, Required = false,
-				HelpText = "Don't Generate/Update JSON. This way it only generates, " +
-				           "or update the files with new patch data")]
+		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
+		[Option(
+			'j', "skip-json",
+			DefaultValue = false, Required = false,
+			HelpText = "Don't Generate/Update JSON. This way it only generates, or update the files with new patch data"
+		)]
 		public bool SkipJson { get; set; }
 
-		[Option('m', "minify-json", DefaultValue = false, Required = false,
-				HelpText = "Don't prettyprint the JSON output")]
+		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
+		[Option(
+			'm', "minify-json",
+			DefaultValue = false, Required = false,
+			HelpText = "Don't prettyprint the JSON output"
+		)]
+
 		public bool MinifyJson { get; set; }
 
-		[Option('s', "skip-save", DefaultValue = false, Required = false,
-		HelpText = "Don't save the database")]
+		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
+		[Option(
+			's', "skip-save",
+			DefaultValue = false, Required = false,
+			HelpText = "Don't save the database"
+		)]
+
 		public bool SkipSave { get; set; }
 
+
+		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
 		[HelpOption]
 		public string GetUsage()
 		{
@@ -40,6 +55,8 @@ namespace ESBreakerCLI
 	{
 		const string edition = "Honest Investigation";
 
+		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "System.Console.WriteLine(System.String)")]
+		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "ESBreaker")]
 		public static void Main(string[] args)
 		{
 			Console.WriteLine(String.Format(CultureInfo.InvariantCulture, "ESBreaker: PSO2es Fan translation Patch tool | {0} edition", edition));
