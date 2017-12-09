@@ -84,6 +84,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="prebuild.ps1" />
+    <None Include="prebuild.sh" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
@@ -93,4 +95,8 @@
     </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent Condition=" '$(OS)' == 'Unix' ">/bin/sh "$(ProjectDir)prebuild.sh" "$(ProjectDir)"</PreBuildEvent>
+    <PreBuildEvent Condition=" '$(OS)' != 'Unix' ">Powershell.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -File "$(ProjectDir)prebuild.ps1" "$(ProjectDir)</PreBuildEvent>
+  </PropertyGroup>
 </Project>
