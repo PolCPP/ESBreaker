@@ -21,7 +21,7 @@ jobs:
           name: Restore .NET packages
           command: nuget restore -NonInteractive -Verbosity quiet
       - save_cache:
-          keys: v1-packages-{{ checksum "ESBreakerCL/packages.config" }}
+          key: v1-packages-{{ checksum "ESBreakerCL/packages.config" }}
           paths:
             - packages
       - restore_cache:
@@ -31,7 +31,7 @@ jobs:
       - run:
           command: ESBreakCI/prebuidl.sh ESBReakCI/
       - save_cache:
-          keys: v1-APK-{{ epoch }}
+          key: v1-APK-{{ epoch }}
           paths:
             - ESBreakerCI/lib/*.apk
       - run:
