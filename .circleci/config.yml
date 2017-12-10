@@ -1,0 +1,53 @@
+version: 2
+jobs:
+  build:
+    working_directory: /root/source
+    docker:
+      - image: mono:latest
+    steps:
+      - run:
+          name: Update APT listing
+          command: apt-get -qq update
+      - run:
+          name: Install git, wget and unzip
+          command: apt-get -qq -y --no-install-recommends install git wget unzip
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-packages-{{ checksum "ESBreakerCLI/packages.config" }}
+            # Find the most recent cache used from any branch
+            - v1-packages-
+      - run:
+          name: Restore .NET packages
+          command: nuget restore -NonInteractive -Verbosity quiet
+      - save_cache:
+          key: v1-packages-{{ checksum "ESBreakerCLI/packages.config" }}
+          paths:
+            - packages
+      - restore_cache:
+          keys:
+            # Find the most recent cache used from any branch
+            - v1-APK-
+      - run:
+          name: Get APK's DLLs
+          command: ./ESBreakerCLI/prebuild.sh ESBreakerCLI/
+      - save_cache:
+          key: v1-APK-{{ epoch }}
+          paths:
+            - ESBreakerCI/lib/*.apk
+      - run:
+          name: Build Release
+          command: msbuild /p:BuildWithMono="true" /p:Configuration=Release
+      - run:
+          name: Debug Release
+          command: msbuild /p:BuildWithMono="true" /p:Configuration=Debug
+      - run:
+          name: Delete External DLLs
+          command: find ESBreakerCLI/bin -type f \( -iname "Assembly-CSharp-firstpass.dll" -o -name "ContentsSerializer.dll" -o -name "ProtoBuffSerializer.dll" -o -name "protobuf-net.dll" -o -name "UnityEngine.dll" -o -name "*.xml" \) -print0|xargs -0 rm -f -v
+      - store_artifacts:
+          path: /root/source/ESBreakerCLI/bin/Release
+          destination: Release
+      - store_artifacts:
+          path: /root/source/ESBreakerCLI/bin/Debug
+          destination: Debug
+
