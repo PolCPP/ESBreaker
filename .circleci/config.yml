@@ -36,7 +36,7 @@ jobs:
           command: msbuild /verbosity:minimal /p:BuildWithMono="true" /p:Configuration=Release
       - run:
           name: Debug Release
-          command: msbuild /verbosity:minimal /p:BuildWithMono="true" /p:Configuration:Debug
+          command: msbuild /verbosity:minimal /p:BuildWithMono="true" /p:Configuration=Debug
       - run:
           name: Delete External Libs
           command: find ESBreakerCLI/lib/ -type f -name "*.dll"|xargs -0 rm -f -v
