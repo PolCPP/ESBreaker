@@ -37,10 +37,10 @@ jobs:
             - ESBreakerCLI/lib/*.apk
       - run:
           name: Build Release
-          command: msbuild /verbosity:minimal /p:BuildWithMono="true" /configuration:Release
+          command: msbuild /verbosity:minimal /p:BuildWithMono="true" /P:Configuration:Release
       - run:
           name: Debug Release
-          command: msbuild /verbosity:minimal /p:BuildWithMono="true" /configuration:Debug
+          command: msbuild /verbosity:minimal /p:BuildWithMono="true" /p:Configuration:Debug
       - run:
           name: Delete External DLLs
           command: find ESBreakerCLI/bin -type f \( -iname "Assembly-CSharp-firstpass.dll" -o -name "ContentsSerializer.dll" -o -name "ProtoBuffSerializer.dll" -o -name "protobuf-net.dll" -o -name "UnityEngine.dll" -o -name "*.xml" \) -print0|xargs -0 rm -f -v
