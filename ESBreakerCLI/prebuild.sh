@@ -13,11 +13,13 @@ APKFilename=$(wget "http://pso2es.10nub.es/game.php?filename=true" --no-http-kee
 Pathtolib="$ProjectDir/lib"
 PathtoAPK="$Pathtolib/$APKFilename"
 
-echo "Downloading $APKFilename from pso2es.10.nub.es to $ProjectDir"
-
 cd $Pathtolib
+
+echo "Downloading $APKFilename from pso2es.10.nub.es to $ProjectDir"
 wget "http://pso2es.10nub.es/game.php" --no-http-keep-alive --dns-timeout=15 --read-timeout=30 --user-agent "$UA" --quiet --continue --trust-server-names
+
 echo "Deleting old APK files"
 find . -name "*.apk" -not -name "$APKFilename" -delete
+
 echo "Extracting DLLs from APK"
 unzip -xujoq "$PathtoAPK" "assets/bin/Data/Managed/*.dll"

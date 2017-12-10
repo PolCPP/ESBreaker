@@ -34,7 +34,7 @@ jobs:
       - save_cache:
           key: v1-APK-{{ epoch }}
           paths:
-            - ESBreakerCI/lib/*.apk
+            - ESBreakerCLI/lib/*.apk
       - run:
           name: Build Release
           command: msbuild /p:BuildWithMono="true" /p:Configuration=Release
