@@ -22,9 +22,10 @@ before_build:
 after_build:
 - cmd: git rev-parse --short %APPVEYOR_REPO_COMMIT%>%TMP%\gitshort.txt
 - cmd: set /P GITSHORT=<%TMP%\gitshort.txt
-- set BUILD_ARCHIVE=%APPVEYOR_REPO_BRANCH%-%GITSHORT%-%PLATFORM%-%CONFIGURATION%.7z
+- set BUILD_ARCHIVE=%APPVEYOR_REPO_BRANCH%-%GITSHORT%-%CONFIGURATION%.7z
 - cmd: cd "ESBreakerCLI\bin\"
 - cmd: cd "%CONFIGURATION%"
 - cmd: 7z a %BUILD_ARCHIVE% *.* -xr!.gitignore -x!ContentsSerializer.dll -x!Assembly-CSharp-firstpass.dll -x!UnityEngine.dll -x!protobuf-net.dll -x!ProtoBuffSerializer.dll -x!*.xml
 - appveyor PushArtifact %BUILD_ARCHIVE%
 - cmd: cd ..\..\..
+- cmd: del /F /Q ESBreakerCLI\lib\*.dll
