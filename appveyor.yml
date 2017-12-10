@@ -28,4 +28,4 @@ after_build:
 - cmd: 7z a %BUILD_ARCHIVE% *.* -xr!.gitignore -x!ContentsSerializer.dll -x!Assembly-CSharp-firstpass.dll -x!UnityEngine.dll -x!protobuf-net.dll -x!ProtoBuffSerializer.dll -x!*.xml
 - appveyor PushArtifact %BUILD_ARCHIVE%
 - cmd: cd ..\..\..
-- cmd: del /F /Q ESBreakerCLI\lib\*.dll
+- cmd: del /F /Q ESBreakerCLI\lib\*.dll ESBreakerCLI\lib\*.zip

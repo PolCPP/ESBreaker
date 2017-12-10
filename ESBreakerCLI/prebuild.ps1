@@ -67,18 +67,9 @@ $OldAPKs = Get-ChildItem -Path $Pathtolib -Filter "*.apk"
 Write-Output "Deleting old APK files"
 $OldAPKs | Remove-Item -Exclude $APKFilename -Force -Confirm:$false -Verbose
 
-if (Test-Path -Path $PathtoZIP)
-{
-	Write-Output "Already extracted DLLs, if you still can not build,"
-	Write-Output "delete $PathtoZIP"
-	[Console]::Out.Flush()
-}
-else
-{
-	Copy-Item -Path $PathtoAPK -Destination $PathtoZIP -Force -Confirm:$false
+Copy-Item -Path $PathtoAPK -Destination $PathtoZIP -Force -Confirm:$false
 
-	Write-Output "Extracting DLLs from APK"
-	[Console]::Out.Flush()
-	ExtractZip $shell.NameSpace($PathtoZIP) $shell.NameSpace($Pathtolib)
-	Write-Output "Done with prebuild script"
-}
+Write-Output "Extracting DLLs from APK"
+[Console]::Out.Flush()
+ExtractZip $shell.NameSpace($PathtoZIP) $shell.NameSpace($Pathtolib)
+Write-Output "Done with prebuild script"
