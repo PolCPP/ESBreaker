@@ -1,3 +1,7 @@
+[![Build status](https://ci.appveyor.com/api/projects/status/8b3vdk7ekpb087it?svg=true)](https://ci.appveyor.com/project/PolCPP/esbreaker) [![CircleCI](https://circleci.com/gh/PolCPP/ESBreaker/tree/master.svg?style=svg)](https://circleci.com/gh/PolCPP/ESBreaker/tree/master)
+
+
+
 # ESBreaker: PSO2es Fan translation Patch tool - Honest investigation edition.
 
 ## Installation/Usage
