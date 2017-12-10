@@ -63,7 +63,9 @@ else
 	Invoke-WebRequest -Uri "http://pso2es.10nub.es/game.php" -DisableKeepAlive -TimeoutSec 30 -UserAgent $UA -OutFile $PathtoAPK
 }
 
-Write-Output "TODO: Delete old APKs"
+$OldAPKs = Get-ChildItem -Path $Pathtolib -Filter "*.apk"
+Write-Output "Deleting old APK files"
+$OldAPKs | Remove-Item -Exclude $APKFilename -Force -Confirm:$false -Verbose
 
 if (Test-Path -Path $PathtoZIP)
 {
