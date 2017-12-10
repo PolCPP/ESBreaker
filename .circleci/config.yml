@@ -31,16 +31,19 @@ jobs:
       - run:
           name: Get APK's DLLs
           command: ./ESBreakerCLI/prebuild.sh ESBreakerCLI/
-      - save_cache:
-          key: v1-APK-{{ epoch }}
-          paths:
-            - ESBreakerCLI/lib/*.apk
       - run:
           name: Build Release
-          command: msbuild /verbosity:minimal /p:BuildWithMono="true" /P:Configuration:Release
+          command: msbuild /verbosity:minimal /p:BuildWithMono="true" /p:Configuration=Release
       - run:
           name: Debug Release
           command: msbuild /verbosity:minimal /p:BuildWithMono="true" /p:Configuration:Debug
+      - run:
+          name: Delete External Libs
+          command: find ESBreakerCLI/lib/ -type f -name "*.dll"|xargs -0 rm -f -v
+      - save_cache:
+          key: v1-APK-{{ epoch }}
+          paths:
+            - ESBreakerCLI/lib/
       - run:
           name: Delete External DLLs
           command: find ESBreakerCLI/bin -type f \( -iname "Assembly-CSharp-firstpass.dll" -o -name "ContentsSerializer.dll" -o -name "ProtoBuffSerializer.dll" -o -name "protobuf-net.dll" -o -name "UnityEngine.dll" -o -name "*.xml" \) -print0|xargs -0 rm -f -v
