@@ -69,7 +69,7 @@ namespace ESBreakerCLI
 								param.Text = savedItem["tr_text"];
 								item["tr_text"] = savedItem["tr_text"];
 							}
-							if (savedItem.ContainsKey("tr_buttons"))
+							if (!EmptyButton && savedItem.ContainsKey("tr_buttons"))
 							{
 								var idx = 0;
 								foreach (var button in (JsonArrayCollection)savedItem["tr_buttons"])
