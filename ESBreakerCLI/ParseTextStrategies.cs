@@ -592,7 +592,7 @@ namespace ESBreakerCLI
 							for (int idx = 0; idx < Count; idx++)
 							{
 								if (existingData[idx] != null &&
-								    existingData[idx]["jp_text"] == innerInformation.Name)
+								    existingData[idx]["jp_text"] == innerInformation.Name.TrimEnd())
 								{
 									savedItem = (JsonObjectCollection)existingData[idx];
 									existingData.RemoveAt(idx);
