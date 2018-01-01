@@ -11,16 +11,18 @@ namespace ESBreakerCLI
     public class DatabaseFiler
     {
         string dbDir = Path.Combine(System.IO.Path.GetDirectoryName(
-                                        Assembly.GetEntryAssembly().Location), "Databases");
+                         Assembly.GetEntryAssembly().Location), "Databases");
         string saveDir = Path.Combine(System.IO.Path.GetDirectoryName(
-                                        Assembly.GetEntryAssembly().Location), "output");
+                           Assembly.GetEntryAssembly().Location), "output");
 
         // Seriously what the heck is going on with those names? Security through obscurity? Please!
-        readonly string[] directories = new string[] {  "hOxogQ43AYuYE4T2QExzg5V5EhcQkxSV",
-                                                        "2cgR3iFOi4SuqNXs0wAYxkps4vI5Y6XB",
-                                                        "yq0QT0IqvC7s8Jxuy9AOdvsS93YSHHjX",
-                                                        "ToY1828HsafEBKw1Jdfi8443peG0CV4z",
-                                                        "t2I4C2vaaNAX5mq6ztKThAuSgejBWr8C"
+        readonly string[] directories = new string[]
+        {
+            "hOxogQ43AYuYE4T2QExzg5V5EhcQkxSV",
+            "2cgR3iFOi4SuqNXs0wAYxkps4vI5Y6XB",
+            "yq0QT0IqvC7s8Jxuy9AOdvsS93YSHHjX",
+            "ToY1828HsafEBKw1Jdfi8443peG0CV4z",
+            "t2I4C2vaaNAX5mq6ztKThAuSgejBWr8C"
         };
 
         // Note: We can't take "MASK_KEY" static vars from Contents.Base.Database because
@@ -91,8 +93,8 @@ namespace ESBreakerCLI
         void LoadMask()
         {
             var field = typeof(SaveData.Filer).GetField("MASK_KEY",
-                                    BindingFlags.Static |
-                                    BindingFlags.NonPublic);
+                   BindingFlags.Static |
+                   BindingFlags.NonPublic);
             mask = (byte[])field.GetValue(null);
         }
 
