@@ -51,8 +51,8 @@ namespace ESBreakerCLI
 				var fm = new DatabaseFiler((int)currentContent);
 				var format = fm.Load();
 				var field = contentTypes[currentContent].GetField("tmpGeneralFormat",
-					            BindingFlags.Static |
-					            BindingFlags.NonPublic);
+									BindingFlags.Static |
+									BindingFlags.NonPublic);
 				field.SetValue(null, format);
 				contentTypes[currentContent].GetMethod("Deploy").Invoke(null, null);
 				files[currentContent] = fm;
@@ -75,8 +75,8 @@ namespace ESBreakerCLI
 			var dictFormat = new Dictionary<TextID, Contents.Text.Base.Format>();
 
 			var field = contentTypes[ContentsID.Text].GetField("dictFormat",
-				            BindingFlags.Static |
-				            BindingFlags.NonPublic);
+								BindingFlags.Static |
+								BindingFlags.NonPublic);
 			dictFormat = (Dictionary<TextID, Contents.Text.Base.Format>)field.GetValue(null);
 
 			for (int i = 0; i < format.Information.Length; i++)
@@ -101,8 +101,8 @@ namespace ESBreakerCLI
 			var dictFormat = new Dictionary<StoryID, Contents.Story.Base.Format>();
 
 			var field = contentTypes[ContentsID.Story].GetField("dictFormat",
-				            BindingFlags.Static |
-				            BindingFlags.NonPublic);
+								BindingFlags.Static |
+								BindingFlags.NonPublic);
 			dictFormat = (Dictionary<StoryID, Contents.Story.Base.Format>)field.GetValue(null);
 
 			for (int i = 0; i < format.Information.Length; i++)
