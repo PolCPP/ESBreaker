@@ -38,12 +38,15 @@ namespace ESBreakerCLI
 						var selectButtons = new JsonArrayCollection();
 						var translatedButtons = new JsonArrayCollection();
 						bool EmptyButton = true;
-						foreach (var button in param.SelectButton)
+						if (param.SelectButton != null)
 						{
-							selectButtons.Add(button.Name);
-							translatedButtons.Add("");
-							if (!String.IsNullOrEmpty(button.Name))
-								EmptyButton = false;
+							foreach (var button in param.SelectButton)
+							{
+								selectButtons.Add(button.Name);
+								translatedButtons.Add("");
+								if (!String.IsNullOrEmpty(button.Name))
+									EmptyButton = false;
+							}
 						}
 
 						item["eventNo"] = param.EventNo;
