@@ -718,5 +718,169 @@ namespace ESBreakerCLI
 
 			return data;
 		}
-	}
+
+        public static JsonArrayCollection Awakening_Skill_Info(object source, JsonArrayCollection existingData, bool saveJson)
+        {
+            JsonArrayCollection data = new JsonArrayCollection();
+            Contents.Text.ChipAwakeningInfos.Format skillAwakenFormat = (Contents.Text.ChipAwakeningInfos.Format)source;
+            
+            foreach (Contents.Text.ChipAwakeningInfos.Information information in skillAwakenFormat.Information)
+            {
+                JsonObjectCollection savedItem = default(JsonObjectCollection);
+                JsonObjectCollection item = new JsonObjectCollection();
+
+                if (existingData != null)
+                {
+                    int Count = existingData.Count;
+                    for (int idx = 0; idx < Count; idx++)
+                    {
+                        if (existingData[idx] != null &&
+                            existingData[idx]["jp_name"] == information.Name)
+                        {
+                            savedItem = (JsonObjectCollection)existingData[idx];
+                            existingData.RemoveAt(idx);
+                            break;
+                        }
+                    }
+                }
+
+                item["jp_name"] = information.Name;
+                item["tr_name"] = "";
+                item["jp_desc"] = information.Description;
+                item["tr_desc"] = "";
+
+                if (savedItem != default(JsonObjectCollection))
+                {
+                    if (!String.IsNullOrEmpty(savedItem["tr_desc"]))
+                    {
+                        information.Description = savedItem["tr_desc"];
+                        item["tr_desc"] = savedItem["tr_desc"];
+                    }
+                    if (!String.IsNullOrEmpty(savedItem["tr_name"]))
+                    {
+                        information.Name = savedItem["tr_name"];
+                        item["tr_name"] = savedItem["tr_name"];
+                    }
+                }
+                if (saveJson)
+                {
+                    data.Add(item);
+                }
+            }
+            return data;
+        }
+
+        public static JsonArrayCollection TowerQuest(object source, JsonArrayCollection existingData, bool saveJson)
+        {
+            JsonArrayCollection data = new JsonArrayCollection();
+            Contents.Text.TowerQuest.Format towerFormat = (Contents.Text.TowerQuest.Format)source;
+            if (towerFormat != null)
+            {
+                Contents.Text.TowerQuest.Information information = towerFormat.Information[0];
+                if (information.Assign != null)
+                {
+                    foreach (Contents.Text.TowerQuest.Information innerInformation in towerFormat.Information)
+                    {
+                        JsonObjectCollection savedItem = default(JsonObjectCollection);
+                        JsonObjectCollection item = new JsonObjectCollection();
+
+                        if (existingData != null)
+                        {
+                            int Count = existingData.Count;
+                            for (int idx = 0; idx < Count; idx++)
+                            {
+                                if (existingData[idx] != null &&
+                                    existingData[idx]["jp_text"] == innerInformation.Text)
+                                {
+                                    savedItem = (JsonObjectCollection)existingData[idx];
+                                    existingData.RemoveAt(idx);
+                                    break;
+                                }
+                            }
+                        }
+
+                        item["jp_text"] = innerInformation.Text;
+                        item["tr_text"] = "";
+
+                        if (savedItem != default(JsonObjectCollection))
+                        {
+                            if (!String.IsNullOrEmpty(savedItem["tr_text"]))
+                            {
+                                innerInformation.Text = savedItem["tr_text"];
+                                item["tr_text"] = savedItem["tr_text"];
+                            }
+                        }
+
+                        if (saveJson)
+                        {
+                            data.Add(item);
+                        }
+                    }
+                }
+            }
+            return data;
+        }
+
+       
+        public static JsonArrayCollection RashArtsExplain(object source, JsonArrayCollection existingData, bool saveJson)
+        {
+            JsonArrayCollection data = new JsonArrayCollection();
+            Contents.Text.RashArtsExplain.Format rashExplainFormat = (Contents.Text.RashArtsExplain.Format)source;
+            string currentAssign;
+
+            foreach (Contents.Text.RashArtsExplain.Information information in rashExplainFormat.Information)
+            {
+                JsonObjectCollection savedItem = default(JsonObjectCollection);
+                JsonObjectCollection item = new JsonObjectCollection();
+                if (information.Assign.GetType() == typeof(Contents.Text.Assign.TypeInt))
+                {
+                    currentAssign = ((Contents.Text.Assign.TypeInt)information.Assign).Param.ToString(CultureInfo.InvariantCulture);
+                }
+                else
+                {
+                    currentAssign = ((Contents.Text.Assign.TypeString)information.Assign).Param.Trim();
+                }
+
+                if (existingData != null)
+                {
+                    int Count = existingData.Count;
+                    for (int idx = 0; idx < Count; idx++)
+                    {
+                        if (existingData[idx] != null &&
+                            existingData[idx]["jp_explainShort"] == information.ExplainShort)
+                        {
+                            savedItem = (JsonObjectCollection)existingData[idx];
+                            existingData.RemoveAt(idx);
+                            break;
+                        }
+                    }
+                }
+
+                item["assign"] = currentAssign;
+                item["jp_explainShort"] = information.ExplainShort;
+                item["tr_explainShort"] = "";
+                item["jp_explainLong"] = information.ExplainLong;
+                item["tr_explainLong"] = "";
+
+                if (savedItem != default(JsonObjectCollection))
+                {
+                    if (!String.IsNullOrEmpty(savedItem["tr_explainShort"]))
+                    {
+                        information.ExplainShort = savedItem["tr_explainShort"];
+                        item["tr_explainShort"] = savedItem["tr_explainShort"];
+                    }
+                    if (!String.IsNullOrEmpty(savedItem["tr_explainLong"]))
+                    {
+                        information.ExplainLong = savedItem["tr_explainLong"];
+                        item["tr_explainLong"] = savedItem["tr_explainLong"];
+                    }
+                }
+                if (saveJson)
+                {
+                    data.Add(item);
+                }
+            }
+            return data;
+        }
+    }
 }

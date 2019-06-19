@@ -53,7 +53,7 @@ namespace ESBreakerCLI
 
 	class MainClass
 	{
-		const string edition = "Honest Investigation";
+		const string edition = "The Photoners Strike Back";
 
 		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "System.Console.WriteLine(System.String)")]
 		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "ESBreaker")]

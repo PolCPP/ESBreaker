@@ -2,13 +2,13 @@
 
 
 
-# ESBreaker: PSO2es Fan translation Patch tool - Honest investigation edition.
+# ESBreaker: PSO2es Fan translation Patch tool - The Photoners Strike Back edition.
 
 ## Installation/Usage
 
 First of all, while we don't include any code by SEGA (because copyright issues), the application needs access to certain DLL's and files from the game to function, but those must be provided by the user.
 
-*This version was built for pso2es 2.70 so earlier newer versions may not work without changes.*
+*This version was built for pso2es 2.8.1 so earlier versions may not work without changes.*
 
 ### Source code Instructions
 
