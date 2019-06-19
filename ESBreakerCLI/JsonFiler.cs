@@ -11,9 +11,9 @@ namespace ESBreakerCLI
 	public static class JsonFiler
 	{
 		private static string cwd = System.IO.Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
-		private static string path = Path.Combine(cwd, "json");
+		private static readonly string path = Path.Combine(cwd, "json");
 
-		private static string extension = ".txt";
+		private static readonly string extension = ".txt";
 
 		public static JsonArrayCollection GetExisting(string fileName)
 		{
