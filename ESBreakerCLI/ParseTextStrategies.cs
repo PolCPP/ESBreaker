@@ -744,6 +744,7 @@ namespace ESBreakerCLI
                     }
                 }
 
+                item["id"] = information.SkillId;
                 item["jp_name"] = information.Name;
                 item["tr_name"] = "";
                 item["jp_desc"] = information.Description;
@@ -861,6 +862,7 @@ namespace ESBreakerCLI
                 item["tr_explainShort"] = "";
                 item["jp_explainLong"] = information.ExplainLong;
                 item["tr_explainLong"] = "";
+                item["flag"] = information.RashArtsFlg;
 
                 if (savedItem != default(JsonObjectCollection))
                 {
