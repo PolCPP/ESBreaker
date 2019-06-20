@@ -125,7 +125,7 @@ namespace ESBreakerCLI
 			foreach (Contents.TextID textType in textTypes)
 			{
 				Contents.Text.Base.Format format = null;
-				if (this.parseStrategies.TryGetValue(format.GetType(), out parse)) try
+				try
 					{
 						format = Contents.Text.Database.Get<Contents.Text.Base.Format>(textType);
 					}
@@ -152,7 +152,7 @@ namespace ESBreakerCLI
 			foreach (Contents.StoryID storyType in storyTypes)
 			{
 				Contents.Story.Base.Format format = null;
-				if (this.parseStrategies.TryGetValue(format.GetType(), out parse)) try
+				try
 					{
 						format = Contents.Story.Database.Get<Contents.Story.Base.Format>(storyType);
 					}
