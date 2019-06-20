@@ -124,22 +124,8 @@ namespace ESBreakerCLI
 			Func<object, JsonArrayCollection, bool, JsonArrayCollection> parse;
 			foreach (Contents.TextID textType in textTypes)
 			{
-				Contents.Text.Base.Format format = null;
-				try
-				{
-					format = Contents.Text.Database.Get<Contents.Text.Base.Format>(textType);
-				}
-				catch (System.Collections.Generic.KeyNotFoundException ex)
-				{
-					Console.Error.WriteLine(ex.ToString());
-				}
-				catch (Exception ex)
-				{
-					Console.Error.WriteLine("Unknown issue with: " + textType.GetType());
-					Console.Error.WriteLine(ex.ToString());
-					throw;
-				}
-				if (format != null && this.parseStrategies.TryGetValue(format.GetType(), out parse))
+				var format = Contents.Text.Database.Get<Contents.Text.Base.Format>(textType);
+				if (this.parseStrategies.TryGetValue(format.GetType(), out parse))
 				{
 					Console.WriteLine(String.Format(CultureInfo.InvariantCulture, "Processing {0}", textType.ToString()));
 					var output = parse(format, JsonFiler.GetExisting(textType.ToString()), saveJson);
@@ -151,23 +137,8 @@ namespace ESBreakerCLI
 			var storyTypes = Enum.GetValues(typeof(Contents.StoryID));
 			foreach (Contents.StoryID storyType in storyTypes)
 			{
-				Contents.Story.Base.Format format = null;
-				try
-				{
-					format = Contents.Story.Database.Get<Contents.Story.Base.Format>(storyType);
-				}
-				catch (System.Collections.Generic.KeyNotFoundException ex)
-				{
-					Console.Error.WriteLine(ex.ToString());
-				}
-				catch (Exception ex)
-				{
-					Console.Error.WriteLine("Unknown issue with: " + storyType.GetType());
-					Console.Error.WriteLine(ex.ToString());
-					throw;
-				}
-
-				if (format != null && this.parseStrategies.TryGetValue(format.GetType(), out parse))
+				var format = Contents.Story.Database.Get<Contents.Story.Base.Format>(storyType);
+				if (this.parseStrategies.TryGetValue(format.GetType(), out parse))
 				{
 					Console.WriteLine(String.Format(CultureInfo.InvariantCulture, "Processing {0}", storyType.ToString()));
 					var output = parse(format, JsonFiler.GetExisting(storyType.ToString()), saveJson);
@@ -191,11 +162,12 @@ namespace ESBreakerCLI
 			parseStrategies.Add(typeof(Contents.Text.SeraphyRoom.Format), ParseTextStrategies.SeraphyRoom);
 			parseStrategies.Add(typeof(Contents.Text.Item.Format), ParseTextStrategies.Item);
 			parseStrategies.Add(typeof(Contents.Text.Explain.Format), ParseTextStrategies.Explain);
-            parseStrategies.Add(typeof(Contents.Story.Title.Format), ParseStoryStrategies.Title);
+			parseStrategies.Add(typeof(Contents.Story.Title.Format), ParseStoryStrategies.Title);
 			parseStrategies.Add(typeof(Contents.Story.Text.Format), ParseStoryStrategies.Text);
-            parseStrategies.Add(typeof(Contents.Text.ChipAwakeningInfos.Format), ParseTextStrategies.Awakening_Skill_Info);
-            parseStrategies.Add(typeof(Contents.Text.TowerQuest.Format), ParseTextStrategies.TowerQuest);
-            parseStrategies.Add(typeof(Contents.Text.RashArtsExplain.Format), ParseTextStrategies.RashArtsExplain);
-        }
+			parseStrategies.Add(typeof(Contents.Text.ChipAwakeningInfos.Format), ParseTextStrategies.Awakening_Skill_Info);
+			parseStrategies.Add(typeof(Contents.Text.TowerQuest.Format), ParseTextStrategies.TowerQuest);
+			parseStrategies.Add(typeof(Contents.Text.RashArtsExplain.Format), ParseTextStrategies.RashArtsExplain);
+			parseStrategies.Add(typeof(Contents.Text.ChipAwakeningExplainTokens.Format), ParseTextStrategies.ChipAwakeningExplainTokens);
+		}
 	}
 }

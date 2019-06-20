@@ -884,5 +884,59 @@ namespace ESBreakerCLI
             }
             return data;
         }
-    }
+		public static JsonArrayCollection ChipAwakeningExplainTokens(object source, JsonArrayCollection existingData, bool saveJson)
+		{
+			JsonArrayCollection data = new JsonArrayCollection();
+
+			Contents.Text.ChipAwakeningExplainTokens.Format tokensTitle = (Contents.Text.ChipAwakeningExplainTokens.Format)source;
+			if (tokensTitle != null)
+			{
+
+				foreach (Contents.Text.ChipAwakeningExplainTokens.Information information in tokensTitle.Information)
+				{
+					int i = 0;
+					for (int idx = 0; idx < information.Tokens.Length; idx++)
+					{
+						JsonObjectCollection savedItem = default(JsonObjectCollection);
+						var param = information.Tokens[idx];
+						JsonObjectCollection item = new JsonObjectCollection();
+
+						if (existingData != null)
+						{
+							int Count = existingData.Count;
+							for (int idy = 0; idy < Count; idy++)
+							{
+								if (existingData[idy] != null &&
+									existingData[idy]["jp_token"] == param)
+								{
+									savedItem = (JsonObjectCollection)existingData[idy];
+									existingData.RemoveAt(idy);
+									break;
+								}
+							}
+						}
+
+						
+						item["jp_token"] = param;
+						item["tr_token"] = "";
+						if (savedItem != default(JsonObjectCollection))
+						{
+							if (!String.IsNullOrEmpty(savedItem["tr_token"]))
+							{
+								information.Tokens[idx] = savedItem["tr_token"];
+								item["tr_token"] = savedItem["tr_token"];
+							}
+						}
+						i++;
+						if (saveJson)
+						{
+							data.Add(item);
+						}
+					}
+
+				}
+			}
+			return data;
+		}
+	}
 }
