@@ -719,6 +719,7 @@ namespace ESBreakerCLI
 			return data;
 		}
 
+		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1707:IdentifiersShouldNotContainUnderscores")]
 		public static JsonArrayCollection Awakening_Skill_Info(object source, JsonArrayCollection existingData, bool saveJson)
 		{
 			JsonArrayCollection data = new JsonArrayCollection();

@@ -13,7 +13,7 @@ namespace ESBreakerCLI
 		private static string cwd = System.IO.Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
 		private static readonly string path = Path.Combine(cwd, "json");
 
-		private static readonly string extension = ".txt";
+		private const string extension = ".txt";
 
 		public static JsonArrayCollection GetExisting(string fileName)
 		{
