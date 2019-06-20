@@ -124,8 +124,22 @@ namespace ESBreakerCLI
 			Func<object, JsonArrayCollection, bool, JsonArrayCollection> parse;
 			foreach (Contents.TextID textType in textTypes)
 			{
-				var format = Contents.Text.Database.Get<Contents.Text.Base.Format>(textType);
-				if (this.parseStrategies.TryGetValue(format.GetType(), out parse))
+				Contents.Text.Base.Format format = null;
+				if (this.parseStrategies.TryGetValue(format.GetType(), out parse)) try
+					{
+						format = Contents.Text.Database.Get<Contents.Text.Base.Format>(textType);
+					}
+					catch (System.Collections.Generic.KeyNotFoundException ex)
+					{
+						Console.Error.WriteLine(ex.ToString());
+					}
+					catch (Exception ex)
+					{
+						Console.Error.WriteLine("Unknown issue with: " + textType.GetType());
+						Console.Error.WriteLine(ex.ToString());
+						throw;
+					}
+				if (format != null && this.parseStrategies.TryGetValue(format.GetType(), out parse))
 				{
 					Console.WriteLine(String.Format(CultureInfo.InvariantCulture, "Processing {0}", textType.ToString()));
 					var output = parse(format, JsonFiler.GetExisting(textType.ToString()), saveJson);
@@ -137,8 +151,23 @@ namespace ESBreakerCLI
 			var storyTypes = Enum.GetValues(typeof(Contents.StoryID));
 			foreach (Contents.StoryID storyType in storyTypes)
 			{
-				var format = Contents.Story.Database.Get<Contents.Story.Base.Format>(storyType);
-				if (this.parseStrategies.TryGetValue(format.GetType(), out parse))
+				Contents.Story.Base.Format format = null;
+				if (this.parseStrategies.TryGetValue(format.GetType(), out parse)) try
+					{
+						format = Contents.Story.Database.Get<Contents.Story.Base.Format>(storyType);
+					}
+					catch (System.Collections.Generic.KeyNotFoundException ex)
+					{
+						Console.Error.WriteLine(ex.ToString());
+					}
+					catch (Exception ex)
+					{
+						Console.Error.WriteLine("Unknown issue with: " + storyType.GetType());
+						Console.Error.WriteLine(ex.ToString());
+						throw;
+					}
+
+				if (format != null && this.parseStrategies.TryGetValue(format.GetType(), out parse))
 				{
 					Console.WriteLine(String.Format(CultureInfo.InvariantCulture, "Processing {0}", storyType.ToString()));
 					var output = parse(format, JsonFiler.GetExisting(storyType.ToString()), saveJson);
