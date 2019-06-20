@@ -191,11 +191,12 @@ namespace ESBreakerCLI
 			parseStrategies.Add(typeof(Contents.Text.SeraphyRoom.Format), ParseTextStrategies.SeraphyRoom);
 			parseStrategies.Add(typeof(Contents.Text.Item.Format), ParseTextStrategies.Item);
 			parseStrategies.Add(typeof(Contents.Text.Explain.Format), ParseTextStrategies.Explain);
-            parseStrategies.Add(typeof(Contents.Story.Title.Format), ParseStoryStrategies.Title);
+			parseStrategies.Add(typeof(Contents.Story.Title.Format), ParseStoryStrategies.Title);
 			parseStrategies.Add(typeof(Contents.Story.Text.Format), ParseStoryStrategies.Text);
-            parseStrategies.Add(typeof(Contents.Text.ChipAwakeningInfos.Format), ParseTextStrategies.Awakening_Skill_Info);
-            parseStrategies.Add(typeof(Contents.Text.TowerQuest.Format), ParseTextStrategies.TowerQuest);
-            parseStrategies.Add(typeof(Contents.Text.RashArtsExplain.Format), ParseTextStrategies.RashArtsExplain);
-        }
+			parseStrategies.Add(typeof(Contents.Text.ChipAwakeningInfos.Format), ParseTextStrategies.Awakening_Skill_Info);
+			parseStrategies.Add(typeof(Contents.Text.TowerQuest.Format), ParseTextStrategies.TowerQuest);
+			parseStrategies.Add(typeof(Contents.Text.RashArtsExplain.Format), ParseTextStrategies.RashArtsExplain);
+			parseStrategies.Add(typeof(Contents.Text.ChipAwakeningExplainTokens.Format), ParseTextStrategies.ChipAwakeningExplainTokens);
+		}
 	}
 }
