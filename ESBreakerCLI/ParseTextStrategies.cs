@@ -724,7 +724,7 @@ namespace ESBreakerCLI
 		{
 			JsonArrayCollection data = new JsonArrayCollection();
 			Contents.Text.ChipAwakeningInfos.Format skillAwakenFormat = (Contents.Text.ChipAwakeningInfos.Format)source;
-			
+
 			foreach (Contents.Text.ChipAwakeningInfos.Information information in skillAwakenFormat.Information)
 			{
 				JsonObjectCollection savedItem = default(JsonObjectCollection);
@@ -823,7 +823,7 @@ namespace ESBreakerCLI
 			return data;
 		}
 
-	   
+
 		public static JsonArrayCollection RashArtsExplain(object source, JsonArrayCollection existingData, bool saveJson)
 		{
 			JsonArrayCollection data = new JsonArrayCollection();
@@ -908,7 +908,7 @@ namespace ESBreakerCLI
 							for (int idy = 0; idy < Count; idy++)
 							{
 								if (existingData[idy] != null &&
-									existingData[idy]["jp_token"] == param)
+								    existingData[idy]["jp_token"] == param)
 								{
 									savedItem = (JsonObjectCollection)existingData[idy];
 									existingData.RemoveAt(idy);
