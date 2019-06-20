@@ -196,6 +196,7 @@ namespace ESBreakerCLI
 			parseStrategies.Add(typeof(Contents.Text.ChipAwakeningInfos.Format), ParseTextStrategies.Awakening_Skill_Info);
 			parseStrategies.Add(typeof(Contents.Text.TowerQuest.Format), ParseTextStrategies.TowerQuest);
 			parseStrategies.Add(typeof(Contents.Text.RashArtsExplain.Format), ParseTextStrategies.RashArtsExplain);
+			parseStrategies.Add(typeof(Contents.Text.ChipAwakeningExplainTokens.Format), ParseTextStrategies.ChipAwakeningExplainTokens);
 		}
 	}
 }
