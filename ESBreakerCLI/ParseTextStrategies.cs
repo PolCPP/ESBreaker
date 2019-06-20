@@ -916,7 +916,6 @@ namespace ESBreakerCLI
 							}
 						}
 
-						
 						item["jp_token"] = param;
 						item["tr_token"] = "";
 						if (savedItem != default(JsonObjectCollection))
